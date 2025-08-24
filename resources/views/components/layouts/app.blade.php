@@ -1,12 +1,99 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="">
 
 <head>
     @include('partials.head')
 </head>
 
-<body class="min-h-screen antialiased bg-neutral-50 dark:bg-neutral-950">
-    {{ $slot }}
+<body class="min-h-screen antialiased bg-neutral-50 dark:bg-neutral-900 text-neutral-800 dark:text-white">
+
+    <div>
+
+        <aside
+            class="fixed top-0 left-0 h-screen w-64 border-e bg-neutral-100 dark:bg-neutral-950 border-neutral-300 dark:border-neutral-800 p-4 flex flex-col gap-4">
+            <a href="{{ route('dashboard') }}">
+                <x-app-logo />
+            </a>
+
+            <nav>
+
+            </nav>
+
+            <x-dropdown position="top" class="mt-auto hidden lg:block" accent contentClass="w-full">
+                <x-slot name="trigger">
+                    <button
+                        class="w-full flex items-center rounded-lg p-1 hover:bg-neutral-800/5 dark:hover:bg-white/10 group">
+                        <div
+                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300 dark:bg-neutral-600 dark:border-neutral-500">
+                            {{ auth()->user()->initials() }}
+                        </div>
+                        <span
+                            class="mx-2 text-sm font-medium truncate dark:text-white/80 dark:group-hover:text-white text-neutral-800/80 group-hover:text-neutral-800">{{ auth()->user()->name }}</span>
+                        <div
+                            class="ms-auto dark:text-white/80 dark:group-hover:text-white text-neutral-800/80 group-hover:text-neutral-800">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        </div>
+                    </button>
+                </x-slot>
+
+                <x-slot name="content">
+                    <div class="flex items-center gap-2 p-2">
+                        <div
+                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300 dark:bg-neutral-600 dark:border-neutral-500">
+                            {{ auth()->user()->initials() }}
+                        </div>
+                        <div class="truncate">
+                            <div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 truncate">
+                                {{ auth()->user()->name }}</div>
+                            <div class="text-xs text-neutral-500 dark:text-neutral-400 truncate">
+                                {{ auth()->user()->email }}</div>
+                        </div>
+                    </div>
+
+                    <hr class="my-1 border-neutral-300 dark:border-neutral-700">
+
+                    <a href="#"
+                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        </svg>
+                        Configurações
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-red-500 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                class="size-5">
+                                <path fill-rule="evenodd"
+                                    d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z"
+                                    clip-rule="evenodd" />
+                                <path fill-rule="evenodd"
+                                    d="M6 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H6.75A.75.75 0 0 1 6 10Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            Sair
+                        </button>
+                    </form>
+
+                </x-slot>
+            </x-dropdown>
+
+        </aside>
+
+        <main class="ml-64 p-6">
+            {{ $slot }}
+        </main>
+    </div>
+
 </body>
 
 </html>
