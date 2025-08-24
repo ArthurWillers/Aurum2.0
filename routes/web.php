@@ -8,5 +8,5 @@ Route::redirect('/', '/login');
 Route::middleware('auth')->group(function () {
   Route::view('/dashboard', 'dashboard')->name('dashboard'); // temporário
 
-  Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout'); //temporário
+  Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
