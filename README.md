@@ -5,14 +5,17 @@
 </p>
 
 <p align="center">
-  <strong>Sistema de gerenciamento financeiro pessoal moderno e intuitivo</strong>
+  <strong>Um software de gestão financeira pessoal focado em simplicidade e facilidade de uso.</strong>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-12.x-red?style=flat&logo=laravel" alt="Laravel" />
+  <img src="https://img.shields.io/badge/Auth-Fortify-blue?style=flat&logo=laravel" alt="Fortify" />
   <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat&logo=php" alt="PHP" />
   <img src="https://img.shields.io/badge/License-GPL--3.0-green?style=flat" alt="License" />
 </p>
+
+O Aurum 2.0 é um sistema de código aberto projetado para quem busca uma maneira intuitiva de controlar suas finanças. O projeto prioriza uma experiência de usuário limpa e funcionalidades essenciais, sem complexidades desnecessárias.
 
 ## Licença
 
