@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -43,5 +44,19 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the user's initials
+     */
+    public function initials(): string
+    {
+        $words = Str::of($this->name)->explode(' ');
+        if ($words->isEmpty()) {
+            return '';
+        }
+        $first = Str::substr($words->first(), 0, 1);
+        $last = Str::substr($words->last(), 0, 1);
+        return $first . $last;
     }
 }
