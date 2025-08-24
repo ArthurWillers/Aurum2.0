@@ -4,6 +4,6 @@
         <x-app-logo-icon class="size-5" />
     </div>
     <div class="ms-1 grid flex-1 text-start text-lg">
-        <span class="ms-1 truncate leading-tight font-semibold text-neutral-800 dark:text-white">Aurum</span>
+        <span class="ms-1 truncate leading-tight font-semibold">Aurum</span>
     </div>
 </div>
