@@ -9,9 +9,7 @@
 
     <div x-data="{ open: false }">
         <aside
-            class="fixed top-0 left-0 h-screen w-64 border-e bg-neutral-100 dark:bg-neutral-950 border-neutral-300 dark:border-neutral-800 p-4 flex flex-col gap-4 z-40
-                   transition-transform duration-300 ease-in-out
-                   lg:translate-x-0"
+            class="fixed top-0 left-0 h-screen w-64 border-e bg-neutral-100 dark:bg-neutral-950 border-neutral-300 dark:border-neutral-800 p-4 flex flex-col gap-4 z-40 transition-transform duration-300 ease-in-out lg:translate-x-0"
             :class="{ '-translate-x-full': !open }">
             <div class="flex items-center">
                 <a href="{{ route('dashboard') }}">
@@ -26,6 +24,15 @@
                     </svg>
 
                 </button>
+            </div>
+
+            <div class="flex flex-col py-3">
+                <form action="{{ route('month.update') }}" method="POST">
+                    @csrf
+                    <x-form-input type="month" name="month" label="Mês de Referência" labelClass="!text-xs"
+                        value="{{ session('selected_month', now()->format('Y-m')) }}" onchange="form.submit()"
+                        required />
+                </form>
             </div>
 
             <nav class="flex flex-col overflow-visible min-h-auto space-y-[2px]">
