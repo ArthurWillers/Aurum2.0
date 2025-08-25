@@ -5,6 +5,7 @@
     'value' => '',
     'placeholder' => '',
     'viewable' => false,
+    'labelClass' => '',
 ])
 
 @php
@@ -19,7 +20,7 @@
 <div class="grid w-full items-center gap-1.5">
 
     <label for="{{ $name }}"
-        class="inline-flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-100">
+        class="inline-flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-100 {{ $labelClass }}" >
         {{ $label }}
     </label>
 
