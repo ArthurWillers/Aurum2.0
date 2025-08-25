@@ -3,7 +3,7 @@
 
     <x-auth-session-status :status="session('status')" />
 
-    <form method="POST" action="{{ route('password.update') }}" class="space-y-6">
+    <form method="POST" action="{{ route('password.update') }}" class="space-y-6" x-data="{ loading: false }" @submit="loading = true">
         @csrf
 
         {{-- Token de Redefinição de Senha --}}

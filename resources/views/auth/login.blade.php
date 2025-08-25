@@ -3,7 +3,7 @@
 
     <x-auth-session-status :status="session('status')" />
 
-    <form action="{{ route('login.store') }}" method="POST" class="space-y-6">
+    <form action="{{ route('login.store') }}" method="POST" class="space-y-6" x-data="{ loading: false }" @submit="loading = true">
         @csrf
 
         {{-- Endereço de email --}}
