@@ -180,7 +180,7 @@
             </x-dropdown>
         </header>
     </div>
-    <main class="ml-64 p-6">
+    <main class="lg:ml-64 p-6">
         {{ $slot }}
     </main>
 
