@@ -22,7 +22,7 @@
             <x-dropdown position="top" class="mt-auto hidden lg:block" accent contentClass="w-full">
                 <x-slot name="trigger">
                     <button
-                        class="w-full flex items-center rounded-lg p-1 hover:bg-neutral-800/5 dark:hover:bg-white/10 group">
+                        class="w-full flex items-center rounded-lg p-1 hover:bg-neutral-800/5 dark:hover:bg-white/10 group cursor-pointer">
                         <div
                             class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300 dark:bg-neutral-600 dark:border-neutral-500">
                             {{ auth()->user()->initials() }}
