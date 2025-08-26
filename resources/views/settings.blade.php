@@ -4,7 +4,7 @@
         <h2 class="text-2xl font-medium mb-2">
             Configurações
         </h2>
-        <p class="mt-1 text-base text-neutral-600 dark:text-gray-400">
+        <p class="mt-1 text-base text-neutral-600 dark:text-neutral-400">
             Gerencie seu perfil e configurações da conta.
         </p>
     </div>
