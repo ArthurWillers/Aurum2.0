@@ -8,6 +8,7 @@ Route::redirect('/', '/login');
 
 Route::middleware('auth')->group(function () {
   Route::view('/dashboard', 'dashboard')->name('dashboard'); // temporário
+  Route::view('/settings', 'settings')->name('settings'); // temporário
 
   Route::post('/update-month', MonthController::class)->name('month.update');
 
