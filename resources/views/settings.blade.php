@@ -90,7 +90,37 @@
 
         <hr class="border-neutral-200 dark:border-neutral-700" />
 
-        
+        {{-- Informações do Perfil --}}
+        <section>
+            <header>
+                <h3 class="text-lg font-medium">
+                    Informações do Perfil
+                </h3>
+                <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                    Atualize as informações de perfil da sua conta.
+                </p>
+            </header>
+
+            <form method="post" action="{{ route('user-profile-information.update') }}" class="mt-6 space-y-6">
+                @csrf
+                @method('put')
+
+                <div class="space-y-3">
+                    <x-form-input name="name" type="text" label="Nome" class="w-full" :value="old('name', auth()->user()->name)" required />
+
+                    <x-form-input name="email" type="email" label="Email" class="w-full" :value="old('email', auth()->user()->email)" required />
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <x-button type="submit">Salvar</x-button>
+                    @if (session('status') === 'profile-information-updated')
+                        <p class="text-sm text-neutral-600 dark:text-neutral-400">Salvo.</p>
+                    @endif
+                </div>
+            </form>
+        </section>
+
+
     </div>
 
     {{-- Lógica JavaScript para o seletor de tema --}}
