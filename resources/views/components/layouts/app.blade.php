@@ -115,7 +115,7 @@
 
                     <hr class="my-1 border-neutral-300 dark:border-neutral-700">
 
-                    <a href="#" @click="open = !open"
+                    <a href="{{ route('settings') }}" @click="open = !open"
                         class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-5">
@@ -197,7 +197,7 @@
 
                     <hr class="my-1 border-neutral-300 dark:border-neutral-700">
 
-                    <a href="#" @click="open = !open"
+                    <a href="{{ route('settings') }}" @click="open = !open"
                         class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="size-5">
@@ -227,7 +227,7 @@
             </x-dropdown>
         </header>
     </div>
-    <main class="lg:ml-64 p-6">
+    <main class="lg:ml-64 p-6 lg:p-8">
         {{ $slot }}
     </main>
 
