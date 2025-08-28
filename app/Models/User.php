@@ -59,4 +59,12 @@ class User extends Authenticatable
         $last = Str::substr($words->last(), 0, 1);
         return $first . $last;
     }
+
+    /**
+     * Get the user's categories
+     */
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }
