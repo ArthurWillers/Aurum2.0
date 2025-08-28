@@ -12,12 +12,14 @@
     $colorClasses = match ($color) {
         'red' => 'bg-red-500 hover:bg-red-700 text-white',
         'accent' => 'bg-accent hover:bg-[color-mix(in_srgb,var(--color-accent),#000_10%)] text-white',
+        'outline' => 'border border-neutral-300 dark:border-neutral-600 hover:bg-neutral-100 dark:hover:bg-neutral-700 dark:text-neutral-100 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white',
         'none' => '',
-        default => 'bg-zinc-800 dark:bg-white hover:bg-zinc-700 dark:hover:bg-zinc-300 text-white dark:text-zinc-800 border border-black/10 dark:border-0',
+        default => 'bg-neutral-800 dark:bg-white hover:bg-neutral-700 dark:hover:bg-neutral-300 text-white dark:text-neutral-800 border border-black/10 dark:border-0',
     };
 
     $shadowClasses = match ($color) {
         'none' => '',
+        'outline' => '',
         default => 'shadow-[inset_0px_1px_--theme(--color-white/.5)]',
     };
 
