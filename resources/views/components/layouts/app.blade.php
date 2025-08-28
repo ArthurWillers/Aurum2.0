@@ -5,7 +5,7 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen antialiased bg-neutral-50 dark:bg-neutral-900 text-neutral-800 dark:text-white">
+<body class="min-h-screen antialiased bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white">
 
     <div x-data="{ open: false }">
         <aside
