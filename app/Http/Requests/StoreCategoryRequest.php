@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Category;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return $this->user()->can('create', Category::class);
     }
 
     /**
@@ -22,7 +23,8 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:255',
+            'type' => 'required|in:income,expense',
         ];
     }
 }

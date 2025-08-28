@@ -43,24 +43,16 @@ class CategoryPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Category $category): bool
+    public function delete(User $user, Category $category): Response
     {
-        return $user->id === $category->user_id;
-    }
+        if ($category->user_id !== $user->id) {
+            return Response::deny('Você não tem permissão para excluir esta categoria.');
+        }
 
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, Category $category): bool
-    {
-        return $user->id === $category->user_id;
-    }
+        if ($category->transactions()->exists()) {
+            return Response::deny('Não é possível excluir uma categoria com transações associadas.');
+        }
 
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, Category $category): bool
-    {
-        return $user->id === $category->user_id;
+        return Response::allow();
     }
 }

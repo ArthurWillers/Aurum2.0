@@ -17,7 +17,6 @@ class Category extends Model
         'name',
         'type',
         'user_id',
-        'parent_id',
     ];
 
     /**
@@ -26,22 +25,6 @@ class Category extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Get the parent category.
-     */
-    public function parent(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'parent_id');
-    }
-
-    /**
-     * Get the subcategories (children).
-     */
-    public function children(): HasMany
-    {
-        return $this->hasMany(Category::class, 'parent_id');
     }
 
     /**

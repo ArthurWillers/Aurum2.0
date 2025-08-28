@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -13,7 +15,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        Gate::authorize('viewAny', Category::class);
+
+        $categories = Auth::user()->categories()->paginate(10);
+
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -21,7 +27,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        Gate::authorize('create', Category::class);
+
+        return view('categories.create', compact('parentCategories'));
     }
 
     /**
@@ -29,15 +37,9 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
-    }
+        Auth::user()->categories()->create($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        //
+        return redirect()->route('categories.index')->with('toast', ['message' => 'Categoria Criada com sucesso!', 'type' => 'success']);
     }
 
     /**
@@ -45,7 +47,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        Gate::authorize('update', $category);
+
+        return view('categories.edit', compact('category', 'parentCategories'));
     }
 
     /**
@@ -53,7 +57,9 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->validated());
+
+        return redirect()->route('categories.index')->with('toast', ['message' => 'Categoria Atualizada com sucesso!', 'type' => 'success']);
     }
 
     /**
@@ -61,6 +67,14 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $response = Gate::inspect('delete', $category);
+
+        if ($response->denied()) {
+            return redirect()->route('categories.index')->with('toast', ['message' => $response->message(), 'type' => 'error']);
+        }
+
+        $category->delete();
+
+        return redirect()->route('categories.index')->with('toast', ['message' => 'Categoria Removida com sucesso!', 'type' => 'success']);
     }
 }
