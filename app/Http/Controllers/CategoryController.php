@@ -29,7 +29,7 @@ class CategoryController extends Controller
     {
         Gate::authorize('create', Category::class);
 
-        return view('categories.create', compact('parentCategories'));
+        return view('categories.create');
     }
 
     /**
@@ -49,7 +49,7 @@ class CategoryController extends Controller
     {
         Gate::authorize('update', $category);
 
-        return view('categories.edit', compact('category', 'parentCategories'));
+        return view('categories.edit', compact('category'));
     }
 
     /**
