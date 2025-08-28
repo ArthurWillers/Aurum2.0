@@ -27,7 +27,7 @@
             x-transition:enter-start="translate-x-full opacity-0" x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave="transition ease-in duration-200 transform"
             x-transition:leave-start="translate-x-0 opacity-100" x-transition:leave-end="translate-x-full opacity-0"
-            class="w-full max-w-sm rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 pointer-events-auto">
+            class="w-full max-w-sm rounded-lg shadow-lg border border-accent bg-white dark:bg-neutral-800 overflow-hidden pointer-events-auto">
             <div class="flex items-center gap-4 p-4">
                 {{-- Ícone --}}
                 @if ($type === 'success')
@@ -76,8 +76,8 @@
             </div>
 
             {{-- Barra de Progresso --}}
-            <div class="w-full bg-neutral-200 dark:bg-neutral-700 rounded-b-lg h-1">
-                <div class="{{ $progressColor }} h-1 rounded-b-lg" :style="`width: ${progress}%`"></div>
+            <div class="w-full bg-neutral-200 dark:bg-neutral-700 h-1">
+                <div class="{{ $progressColor }} h-1 " :style="`width: ${progress}%`"></div>
             </div>
         </div>
     </div>
