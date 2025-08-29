@@ -46,7 +46,7 @@
                     Dashboard
                 </x-nav-link>
 
-                <x-nav-link>
+                <x-nav-link :href="route('incomes.index')" :current="request()->routeIs('incomes.*')">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -56,7 +56,7 @@
                     Receitas
                 </x-nav-link>
 
-                <x-nav-link>
+                <x-nav-link :href="route('expenses.index')" :current="request()->routeIs('expenses.*')">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-4">
                         <path stroke-linecap="round" stroke-linejoin="round"
