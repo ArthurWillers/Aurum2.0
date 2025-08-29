@@ -19,6 +19,9 @@ return new class extends Migration
             $table->date('date');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('set null');
+            $table->uuid('transaction_group_uuid')->nullable();
+            $table->unsignedTinyInteger('installment_number')->nullable();
+            $table->unsignedTinyInteger('total_installments')->nullable();
             $table->timestamps();
         });
     }
