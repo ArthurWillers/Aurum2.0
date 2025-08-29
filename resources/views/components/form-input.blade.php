@@ -6,6 +6,7 @@
     'placeholder' => '',
     'viewable' => false,
     'labelClass' => '',
+    'numeric' => false,
 ])
 
 @php
@@ -20,7 +21,7 @@
 <div class="grid w-full items-center gap-1.5">
 
     <label for="{{ $name }}"
-        class="inline-flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-100 {{ $labelClass }}" >
+        class="inline-flex items-center text-sm font-semibold text-zinc-700 dark:text-zinc-100 {{ $labelClass }}">
         {{ $label }}
     </label>
 
@@ -28,9 +29,12 @@
         <input
             @if ($viewable) :type="show ? 'text' : 'password'"
             @else
-                type="{{ $type }}" @endif
+            type="{{ $numeric ? 'text' : $type }}" @endif
             id="{{ $name }}" name="{{ $name }}" placeholder="{{ $placeholder }}"
-            value="{{ $value }}" {{ $attributes->merge(['class' => $classes]) }} />
+            value="{{ $value }}" {{ $attributes->merge(['class' => $classes]) }}
+            @if ($numeric) x-data
+                @input="$event.target.value = $event.target.value.replace(/[^0-9.,]/g, '')"
+                inputmode="decimal" @endif />
 
         @if ($viewable)
             <div class="absolute top-0 bottom-0 flex items-center gap-x-1.5 pe-3 end-0 text-xs text-zinc-400">
