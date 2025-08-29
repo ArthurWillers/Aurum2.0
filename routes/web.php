@@ -14,7 +14,7 @@ Route::middleware('auth')->group(function () {
 
   Route::post('/update-month', MonthController::class)->name('month.update');
 
-  Route::resource('categories', CategoryController::class);
+  Route::resource('categories', CategoryController::class)->except(['show']);
 
   Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
