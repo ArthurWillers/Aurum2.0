@@ -18,6 +18,29 @@ class StoreTransactionRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation()
+    {
+        $transactionType = request('transaction_type');
+
+        // Define qual campo de data usar baseado no tipo de transação
+        $dateField = match ($transactionType) {
+            'single' => 'single_date',
+            'recurring' => 'recurring_date',
+            'installment' => 'installment_date',
+            default => null
+        };
+
+        // Se encontrou um campo de data válido, copia o valor para o campo 'date'
+        if ($dateField && request()->has($dateField)) {
+            $this->merge([
+                'date' => request($dateField)
+            ]);
+        }
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>

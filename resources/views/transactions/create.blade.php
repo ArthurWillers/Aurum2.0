@@ -143,20 +143,20 @@
 
                 {{-- Data - Para transação única --}}
                 <div x-show="transactionType === 'single'" x-transition>
-                    <x-form-input type="date" name="date" label="Data da Transação"
-                        value="{{ old('date', session('selected_month') ? (session('selected_month') == now()->format('Y-m') ? now()->format('Y-m-d') : session('selected_month') . '-01') : now()->format('Y-m-d')) }}" />
+                    <x-form-input type="date" name="single_date" label="Data da Transação"
+                        value="{{ old('single_date', session('selected_month') ? (session('selected_month') == now()->format('Y-m') ? now()->format('Y-m-d') : session('selected_month') . '-01') : now()->format('Y-m-d')) }}" />
                 </div>
 
                 {{-- Data - Para transação recorrente --}}
                 <div x-show="transactionType === 'recurring'" x-transition>
-                    <x-form-input type="date" name="date" label="Data de Início"
-                        value="{{ old('date', session('selected_month') ? (session('selected_month') == now()->format('Y-m') ? now()->format('Y-m-d') : session('selected_month') . '-01') : now()->format('Y-m-d')) }}" />
+                    <x-form-input type="date" name="recurring_date" label="Data de Início"
+                        value="{{ old('recurring_date', session('selected_month') ? (session('selected_month') == now()->format('Y-m') ? now()->format('Y-m-d') : session('selected_month') . '-01') : now()->format('Y-m-d')) }}" />
                 </div>
 
                 {{-- Data - Para transação parcelada --}}
                 <div x-show="transactionType === 'installment'" x-transition>
-                    <x-form-input type="date" name="date" label="Data da Primeira Parcela"
-                        value="{{ old('date', session('selected_month') ? (session('selected_month') == now()->format('Y-m') ? now()->format('Y-m-d') : session('selected_month') . '-01') : now()->format('Y-m-d')) }}" />
+                    <x-form-input type="date" name="installment_date" label="Data da Primeira Parcela"
+                        value="{{ old('installment_date', session('selected_month') ? (session('selected_month') == now()->format('Y-m') ? now()->format('Y-m-d') : session('selected_month') . '-01') : now()->format('Y-m-d')) }}" />
                 </div>
 
                 {{-- Categoria --}}
