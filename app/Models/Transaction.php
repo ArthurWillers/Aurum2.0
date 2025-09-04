@@ -20,6 +20,9 @@ class Transaction extends Model
         'date',
         'user_id',
         'category_id',
+        'transaction_group_uuid',
+        'installment_number',
+        'total_installments',
     ];
 
     /**
