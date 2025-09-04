@@ -113,15 +113,6 @@ class TransactionController extends Controller
     }
 
     /**
-     * Set the selected month in session.
-     */
-    public function setMonth(string $month)
-    {
-        session(['selected_month' => $month]);
-        return redirect()->back();
-    }
-
-    /**
      * Create a single transaction.
      */
     private function createSingleTransaction(array $data): void
