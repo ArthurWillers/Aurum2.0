@@ -6,16 +6,17 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CategoryController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        Gate::authorize('viewAny', Category::class);
+        $this->authorize('viewAny', Category::class);
 
         $categories = Auth::user()->categories()->paginate(10);
 
@@ -27,7 +28,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        Gate::authorize('create', Category::class);
+        $this->authorize('create', Category::class);
 
         return view('categories.create');
     }
@@ -47,7 +48,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        Gate::authorize('update', $category);
+        $this->authorize('update', $category);
 
         return view('categories.edit', compact('category'));
     }
@@ -67,10 +68,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $response = Gate::inspect('delete', $category);
-
-        if ($response->denied()) {
-            return redirect()->route('categories.index')->with('toast', ['message' => $response->message(), 'type' => 'error']);
+        try {
+            $this->authorize('delete', $category);
+        } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
+            return redirect()->route('categories.index')->with('toast', ['message' => $e->getMessage(), 'type' => 'error']);
         }
 
         $category->delete();
