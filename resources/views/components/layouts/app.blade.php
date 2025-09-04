@@ -227,7 +227,7 @@
             </x-dropdown>
         </header>
     </div>
-    <main class="lg:ml-64 p-6 lg:p-8">
+    <main class="lg:ml-64 p-6 lg:pt-8 lg:px-8 lg:pb-0">
         {{ $slot }}
     </main>
 
