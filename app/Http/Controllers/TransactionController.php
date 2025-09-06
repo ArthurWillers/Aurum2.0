@@ -163,7 +163,7 @@ class TransactionController extends Controller
             $transactionDate = $startDate->copy()->addMonths($i - 1);
 
             Transaction::create([
-                'description' => $data['description'] . " ({$i}/{$data['installments']})",
+                'description' => $data['description'],
                 'amount' => $installmentAmount,
                 'type' => $data['type'],
                 'date' => $transactionDate->format('Y-m-d'),

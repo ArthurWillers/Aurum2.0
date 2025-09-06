@@ -54,6 +54,11 @@
                     <div class="hidden sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr_0.5fr] items-center">
                         <div class="px-4 lg:px-6 py-4">
                             <span class="text-sm font-medium">{{ $transaction->description }}</span>
+                            @if ($transaction->total_installments)
+                                <span class="text-xs text-neutral-500 dark:text-neutral-400">
+                                    ({{ $transaction->installment_number }}/{{ $transaction->total_installments }})
+                                </span>
+                            @endif
                         </div>
                         <div class="px-4 lg:px-6 py-4">
                             <span class="text-sm text-neutral-600 dark:text-neutral-400">
@@ -122,6 +127,11 @@
                                 <h3
                                     class="text-base font-semibold text-neutral-900 dark:text-neutral-100 leading-tight mb-1">
                                     {{ $transaction->description }}
+                                    @if ($transaction->total_installments)
+                                        <span class="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
+                                            ({{ $transaction->installment_number }}/{{ $transaction->total_installments }})
+                                        </span>
+                                    @endif
                                 </h3>
                                 <div class="flex items-center gap-2 text-sm text-neutral-600 dark:text-neutral-400">
                                     <span>{{ $transaction->category->name ?? 'Sem categoria' }}</span>
