@@ -97,8 +97,8 @@
                             <div
                                 class="flex flex-col items-center justify-center py-3 rounded-md transition-colors cursor-pointer
                             peer-checked:bg-white peer-checked:dark:bg-neutral-900 peer-checked:shadow-sm
-                            peer-checked:text-neutral-900 peer-checked:dark:text-neutral-100
-                            text-neutral-700 dark:text-neutral-300">
+                            peer-checked:text-green-600 peer-checked:dark:text-green-400
+                            text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -112,12 +112,12 @@
                             <div
                                 class="flex flex-col items-center justify-center py-3 rounded-md transition-colors cursor-pointer
                             peer-checked:bg-white peer-checked:dark:bg-neutral-900 peer-checked:shadow-sm
-                            peer-checked:text-neutral-900 peer-checked:dark:text-neutral-100
-                            text-neutral-700 dark:text-neutral-300">
+                            peer-checked:text-red-600 peer-checked:dark:text-red-400
+                            text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.51-5.511-3.181" />
+                                        d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.50-5.511-3.181" />
                                 </svg>
                                 <span class="text-sm font-medium">Despesa</span>
                             </div>
