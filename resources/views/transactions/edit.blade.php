@@ -36,6 +36,78 @@
             @csrf
             @method('PUT')
 
+            <div class="space-y-4 mb-9"
+                x-data='{
+                type: @json(old('type', $transaction->type)),
+                categories: @json($categories ?? []),
+                getFilteredCategories() {
+                    return this.categories.filter(cat => cat.type === this.type);
+                }
+            }'>
+                {{-- Receita ou Despesa --}}
+                <fieldset class="mb-6">
+                    <legend class="text-sm font-semibold text-neutral-700 dark:text-neutral-100 mb-3">
+                        Receita ou Despesa
+                    </legend>
+                    <div class="flex gap-2 items-center bg-neutral-200 dark:bg-neutral-700 rounded-lg p-1">
+                        <label class="flex-1">
+                            <input type="radio" name="type" value="income" x-model="type" class="peer sr-only"
+                                {{ old('type', $transaction->type) === 'income' ? 'checked' : '' }} />
+                            <div
+                                class="flex flex-col items-center justify-center py-3 rounded-md transition-colors cursor-pointer
+                            peer-checked:bg-white peer-checked:dark:bg-neutral-900 peer-checked:shadow-sm
+                            peer-checked:text-green-600 peer-checked:dark:text-green-400
+                            text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+                                </svg>
+                                <span class="text-sm font-medium">Receita</span>
+                            </div>
+                        </label>
+                        <label class="flex-1">
+                            <input type="radio" name="type" value="expense" x-model="type" class="peer sr-only"
+                                {{ old('type', $transaction->type) === 'expense' ? 'checked' : '' }} />
+                            <div
+                                class="flex flex-col items-center justify-center py-3 rounded-md transition-colors cursor-pointer
+                            peer-checked:bg-white peer-checked:dark:bg-neutral-900 peer-checked:shadow-sm
+                            peer-checked:text-red-600 peer-checked:dark:text-red-400
+                            text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M2.25 6 9 12.75l4.286-4.286a11.948 11.948 0 0 1 4.306 6.43l.776 2.898m0 0 3.182-5.511m-3.182 5.50-5.511-3.181" />
+                                </svg>
+                                <span class="text-sm font-medium">Despesa</span>
+                            </div>
+                        </label>
+                    </div>
+                    <x-form-error name="type" />
+                </fieldset>
+
+                <x-form-input label="Descrição" name="description" placeholder="{{ $transaction->description }}"
+                    :value="old('description', $transaction->description)" autofocus />
+
+                <x-form-input label="Valor (R$)" name="amount" placeholder="{{ $transaction->amount }}" numeric
+                    :value="old('amount', $transaction->amount)" />
+
+                <x-form-input type="date" name="date" label="Data da Transação"
+                    value="{{ old('date', $transaction->date->format('Y-m-d')) }}" />
+
+                {{-- Categoria --}}
+                <x-form-select label="Categoria" name="category_id">
+                    <option value="" disabled selected>Selecione uma categoria</option>
+
+                    <template x-for="category in getFilteredCategories()" :key="category.id">
+                        <option :value="category.id"
+                            :selected="category.id == '{{ old('category_id', $transaction->category_id) }}'"
+                            x-text="category.name">
+                        </option>
+                    </template>
+                </x-form-select>
+            </div>
+
             {{-- Botões --}}
             <div class="flex items-center justify-between">
                 <x-button href="{{ route($transaction->type === 'income' ? 'incomes.index' : 'expenses.index') }}"
