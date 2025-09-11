@@ -13,12 +13,18 @@
 
     {{-- Conteúdo --}}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-2 mb-8">
+        @php
+            $selectedMonth = session('selected_month', now()->format('Y-m'));
+            $monthYear = \Carbon\Carbon::parse($selectedMonth)->locale('pt_BR')->isoFormat('MMMM [de] YYYY');
+        @endphp
+
         {{-- Card Receitas do Mês --}}
         <a href="{{ route('incomes.index') }}"
             class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-6 border border-neutral-200 dark:border-neutral-700 hover:shadow-xl transition-shadow duration-200 block">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Receitas do Mês</p>
+                    <p class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Receitas de
+                        {{ ucfirst($monthYear) }}</p>
                     <p class="text-2xl font-semibold text-green-600 dark:text-green-400">
                         R$ {{ number_format($incomes, 2, ',', '.') }}
                     </p>
@@ -26,7 +32,8 @@
                 <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6 text-green-600 dark:text-green-400">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941" />
                     </svg>
                 </div>
             </div>
@@ -37,7 +44,8 @@
             class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-6 border border-neutral-200 dark:border-neutral-700 hover:shadow-xl transition-shadow duration-200 block">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Despesas do Mês</p>
+                    <p class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Despesas de
+                        {{ ucfirst($monthYear) }}</p>
                     <p class="text-2xl font-semibold text-red-600 dark:text-red-400">
                         R$ {{ number_format($expenses, 2, ',', '.') }}
                     </p>
@@ -57,7 +65,8 @@
             class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-6 border border-neutral-200 dark:border-neutral-700">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Saldo do Mês</p>
+                    <p class="text-sm font-medium text-neutral-600 dark:text-neutral-400">Saldo de
+                        {{ ucfirst($monthYear) }}</p>
                     <p
                         class="text-2xl font-semibold {{ $incomes - $expenses >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400' }}">
                         R$ {{ number_format($incomes - $expenses, 2, ',', '.') }}
