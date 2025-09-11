@@ -12,6 +12,34 @@
         </x-button>
     </div>
 
+    {{-- Filtros --}}
+    <div class="mb-4">
+        <form method="GET" action="{{ $type === 'income' ? route('incomes.index') : route('expenses.index') }}"
+            class="flex gap-4 items-end">
+            <div class="flex-1 w-full">
+                <x-form-select label="Filtrar por Categoria" name="category_id" onchange="this.form.submit()">
+                    <option value="">Todas as categorias</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}"
+                            {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </x-form-select>
+            </div>
+            @if (request('category_id'))
+                <a href="{{ $type === 'income' ? route('incomes.index') : route('expenses.index') }}"
+                    class="inline-flex items-center px-3 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 mb-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="size-4 mr-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                    Limpar filtro
+                </a>
+            @endif
+        </form>
+    </div>
+
     <div
         class="w-full rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800">
 
@@ -150,8 +178,9 @@
                                     <x-slot name="trigger">
                                         <button
                                             class="cursor-pointer rounded-md border border-neutral-300 dark:border-neutral-600 p-2 transition duration-150 ease-in-out hover:bg-neutral-100 dark:hover:bg-neutral-700">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-6">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M6.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM12.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0ZM18.75 12a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                                             </svg>
@@ -160,8 +189,9 @@
                                     <x-slot name="content">
                                         <a href="{{ route('transactions.edit', $transaction) }}"
                                             class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                class="size-5">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                                             </svg>
@@ -187,8 +217,16 @@
             @empty
                 <div class="py-12 px-4 text-center">
                     <div class="text-neutral-600 dark:text-neutral-200">
-                        <p class="font-medium">Você ainda não criou nenhuma
-                            {{ $type === 'income' ? 'receita' : 'despesa' }}</p>
+                        @if (request('category_id'))
+                            @php
+                                $selectedCategory = $categories->firstWhere('id', request('category_id'));
+                            @endphp
+                            <p class="font-medium">Não há {{ $type === 'income' ? 'receitas' : 'despesas' }}
+                                na categoria "{{ $selectedCategory?->name }}" neste mês</p>
+                        @else
+                            <p class="font-medium">Você ainda não criou nenhuma
+                                {{ $type === 'income' ? 'receita' : 'despesa' }} neste mês</p>
+                        @endif
                     </div>
                 </div>
             @endforelse

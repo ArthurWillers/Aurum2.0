@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
 use App\Models\Transaction;
-use App\Models\Category;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
@@ -17,7 +17,7 @@ class TransactionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(String $type)
+    public function index(Request $request, String $type)
     {
         $this->authorize('viewAny', Transaction::class);
 
@@ -25,17 +25,31 @@ class TransactionController extends Controller
 
         // Pega o mês da sessão ou usa o mês atual
         $selectedMonth = session('selected_month', now()->format('Y-m'));
-        
-        $transactions = Auth::user()->transactions()
+
+        $query = Auth::user()->transactions()
             ->where('type', $type)
             ->whereYear('date', Carbon::parse($selectedMonth)->year)
             ->whereMonth('date', Carbon::parse($selectedMonth)->month)
-            ->with('category')
+            ->with('category');
+
+        // Aplica filtro por categoria se fornecido
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        $transactions = $query
             ->latest('date')
             ->latest('updated_at')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
-        return view('transactions.index', compact('transactions', 'type', 'title'));
+        // Busca todas as categorias do usuário para o filtro
+        $categories = Auth::user()->categories()
+            ->where('type', $type)
+            ->orderBy('name')
+            ->get();
+
+        return view('transactions.index', compact('transactions', 'type', 'title', 'categories'));
     }
 
     /**
