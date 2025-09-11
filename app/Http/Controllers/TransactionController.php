@@ -119,7 +119,23 @@ class TransactionController extends Controller
      */
     public function update(UpdateTransactionRequest $request, Transaction $transaction)
     {
-        //
+        $this->authorize('update', $transaction);
+
+        $validated = $request->validated();
+
+        // Converte vírgula para ponto no valor, se necessário
+        if (isset($validated['amount'])) {
+            $validated['amount'] = str_replace(',', '.', $validated['amount']);
+        }
+
+        $transaction->update($validated);
+
+        $route = $validated['type'] === 'income' ? 'incomes.index' : 'expenses.index';
+
+        return redirect()->route($route)->with('toast', [
+            'message' => 'Transação atualizada com sucesso!',
+            'type' => 'success'
+        ]);
     }
 
     /**
