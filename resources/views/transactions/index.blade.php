@@ -15,7 +15,7 @@
     {{-- Filtros --}}
     <div class="mb-4">
         <form method="GET" action="{{ $type === 'income' ? route('incomes.index') : route('expenses.index') }}"
-            class="flex gap-4 items-end">
+            class="flex flex-col sm:flex-row gap-4 sm:items-end">
             <div class="flex-1 w-full">
                 <x-form-select label="Filtrar por Categoria" name="category_id" onchange="this.form.submit()">
                     <option value="">Todas as categorias</option>
@@ -27,16 +27,46 @@
                     @endforeach
                 </x-form-select>
             </div>
-            @if (request('category_id'))
-                <a href="{{ $type === 'income' ? route('incomes.index') : route('expenses.index') }}"
-                    class="inline-flex items-center px-3 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 mb-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="size-4 mr-1">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                    Limpar filtro
-                </a>
-            @endif
+
+            {{-- Botões de ação - Mobile e Desktop --}}
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:items-center">
+                @if (request('category_id'))
+                    <a href="{{ $type === 'income' ? route('incomes.index') : route('expenses.index') }}"
+                        class="inline-flex items-center justify-center px-3 py-2 text-sm text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 sm:mb-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="size-4 mr-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                        Limpar filtro
+                    </a>
+                @endif
+
+                {{-- Botão para alternar paginação --}}
+                <div class="sm:mb-1">
+                    @if (request('show_all'))
+                        <a href="{{ ($type === 'income' ? route('incomes.index') : route('expenses.index')) . (request('category_id') ? '?category_id=' . request('category_id') : '') }}"
+                            class="inline-flex items-center justify-center w-full sm:w-auto px-3 py-2 text-sm bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                            Paginar
+                        </a>
+                    @else
+                        <a href="{{ ($type === 'income' ? route('incomes.index') : route('expenses.index')) . '?show_all=1' . (request('category_id') ? '&category_id=' . request('category_id') : '') }}"
+                            class="inline-flex items-center justify-center w-full sm:w-auto px-3 py-2 text-sm bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+                            </svg>
+                            Mostrar Todas
+                        </a>
+                    @endif
+                </div>
+            </div>
+
         </form>
     </div>
 
@@ -233,8 +263,10 @@
         </div>
     </div>
 
-    <div class="mt-1">
-        {{ $transactions->links() }}
-    </div>
+    @if (!request('show_all') && method_exists($transactions, 'hasPages') && $transactions->hasPages())
+        <div class="mt-1">
+            {{ $transactions->links() }}
+        </div>
+    @endif
 
 </x-layouts.app>

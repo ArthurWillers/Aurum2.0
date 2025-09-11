@@ -37,11 +37,19 @@ class TransactionController extends Controller
             $query->where('category_id', $request->category_id);
         }
 
-        $transactions = $query
-            ->latest('date')
-            ->latest('updated_at')
-            ->paginate(10)
-            ->withQueryString();
+        // Verifica se deve usar paginação
+        if ($request->has('show_all')) {
+            $transactions = $query
+                ->latest('date')
+                ->latest('updated_at')
+                ->get();
+        } else {
+            $transactions = $query
+                ->latest('date')
+                ->latest('updated_at')
+                ->paginate(9)
+                ->withQueryString();
+        }
 
         // Busca todas as categorias do usuário para o filtro
         $categories = Auth::user()->categories()
