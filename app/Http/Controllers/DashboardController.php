@@ -48,6 +48,23 @@ class DashboardController extends Controller
             ->sortByDesc('total')
             ->values();
 
-        return view('dashboard', compact('incomes', 'expenses', 'expensesByCategory'));
+        // Busca a soma das receitas por categoria para o gráfico
+        $incomesByCategory = Auth::user()->transactions()
+            ->where('type', 'income')
+            ->whereYear('date', Carbon::parse($selectedMonth)->year)
+            ->whereMonth('date', Carbon::parse($selectedMonth)->month)
+            ->with('category')
+            ->get()
+            ->groupBy('category_id')
+            ->map(function ($transactions) {
+                return [
+                    'category' => $transactions->first()->category,
+                    'total' => $transactions->sum('amount'),
+                ];
+            })
+            ->sortByDesc('total')
+            ->values();
+
+        return view('dashboard', compact('incomes', 'expenses', 'expensesByCategory', 'incomesByCategory'));
     }
 }
