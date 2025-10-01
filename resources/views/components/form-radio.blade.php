@@ -17,10 +17,10 @@
         {{-- Rádio Visual --}}
         <div
             class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border peer-checked:border-5
-                    border-neutral-300 dark:border-neutral-600
-                    bg-white dark:bg-neutral-800
+                    border-neutral-300
+                    bg-white
                     transition-colors duration-200
-                    peer-checked:border-neutral-900 dark:peer-checked:border-white">
+                    peer-checked:border-neutral-900">
         </div>
 
         @if ($label)

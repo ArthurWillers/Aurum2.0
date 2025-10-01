@@ -10,12 +10,12 @@
 
         {{-- Checkbox Visual --}}
         <div class="flex h-[1.125rem] w-[1.125rem] shrink-0 items-center justify-center rounded-sm border
-                    border-zinc-300 dark:border-zinc-700
-                    bg-white dark:bg-white/10
+                    border-zinc-300
+                    bg-white
                     shadow-xs transition-colors duration-200
-                    peer-checked:border-zinc-900 dark:peer-checked:border-zinc-100
-                    peer-checked:bg-zinc-900 dark:peer-checked:bg-zinc-100
-                    text-transparent peer-checked:text-white dark:peer-checked:text-zinc-900">
+                    peer-checked:border-zinc-900
+                    peer-checked:bg-zinc-900
+                    text-transparent peer-checked:text-white">
 
             <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
                 <path fill-rule="evenodd"
@@ -25,7 +25,7 @@
         </div>
 
         @if ($label)
-            <span class="text-sm font-medium text-zinc-700 dark:text-zinc-100">
+            <span class="text-sm font-medium text-zinc-700">
                 {{ $label }}
             </span>
         @endif

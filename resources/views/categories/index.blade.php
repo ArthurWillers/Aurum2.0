@@ -12,26 +12,26 @@
     </div>
 
     <div
-        class="w-full rounded-lg shadow-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800">
+        class="w-full rounded-lg shadow-xl border border-neutral-200 bg-white">
 
         {{-- Header - Desktop --}}
-        <div class="hidden sm:grid sm:grid-cols-[2fr_1fr_1fr] border-b border-neutral-200 dark:border-neutral-700">
+        <div class="hidden sm:grid sm:grid-cols-[2fr_1fr_1fr] border-b border-neutral-200">
             <div class="px-4 lg:px-6 py-3 text-left">
                 <span
-                    class="text-xs font-medium text-neutral-600 dark:text-neutral-200 uppercase tracking-wider">Nome</span>
+                    class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Nome</span>
             </div>
             <div class="px-4 lg:px-6 py-3 text-left">
                 <span
-                    class="text-xs font-medium text-neutral-600 dark:text-neutral-200 uppercase tracking-wider">Tipo</span>
+                    class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Tipo</span>
             </div>
             <div class="px-4 lg:px-6 py-3 text-end">
                 <span
-                    class="text-xs font-medium text-neutral-600 dark:text-neutral-200 uppercase tracking-wider">Ações</span>
+                    class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Ações</span>
             </div>
         </div>
 
         {{-- Tabela --}}
-        <div class="divide-y divide-neutral-200 dark:divide-neutral-700">
+        <div class="divide-y divide-neutral-200">
             @forelse ($categories as $category)
                 <div class="relative">
                     <form method="POST" id="delete-form-{{ $category->id }}"
@@ -49,8 +49,8 @@
                             <span
                                 class="inline-flex items-center px-2 py-1 text-sm font-medium rounded-md
                                 {{ $category->type === 'income'
-                                    ? 'text-green-700 dark:text-green-200 bg-green-400/20 dark:bg-green-400/40'
-                                    : 'text-red-700 dark:text-red-200 bg-red-400/20 dark:bg-red-400/40' }}">
+                                    ? 'text-green-700 bg-green-400/20'
+                                    : 'text-red-700 bg-red-400/20' }}">
                                 {{ $category->type === 'income' ? 'Receita' : 'Despesa' }}
                             </span>
                         </div>
@@ -58,7 +58,7 @@
                             <x-dropdown position="bottom-end" accent>
                                 <x-slot name="trigger">
                                     <button
-                                        class="cursor-pointer rounded-md border border-neutral-300 dark:border-neutral-600 p-2 transition duration-150 ease-in-out hover:bg-neutral-100 dark:hover:bg-neutral-700">
+                                        class="cursor-pointer rounded-md border border-neutral-300 p-2 transition duration-150 ease-in-out hover:bg-neutral-100">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -68,7 +68,7 @@
                                 </x-slot>
                                 <x-slot name="content">
                                     <a href="{{ route('categories.edit', $category) }}"
-                                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800">
+                                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-5">
                                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -80,7 +80,7 @@
 
                                     <button type="submit"
                                         form="delete-form-{{ $category->id }}"
-                                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-red-500 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer">
+                                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-red-500 hover:bg-neutral-200 cursor-pointer">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                             class="size-5">
@@ -103,20 +103,20 @@
                                     <span
                                         class="inline-flex items-center px-2 py-1 text-xs font-medium rounded-md
                                         {{ $category->type === 'income'
-                                            ? 'text-green-700 dark:text-green-200 bg-green-400/20 dark:bg-green-400/40'
-                                            : 'text-red-700 dark:text-red-200 bg-red-400/20 dark:bg-red-400/40' }}">
+                                            ? 'text-green-700 bg-green-400/20'
+                                            : 'text-red-700 bg-red-400/20' }}">
                                         {{ $category->type === 'income' ? 'Receita' : 'Despesa' }}
                                     </span>
                                 </div>
                                 <h3
-                                    class="text-base font-semibold text-neutral-900 dark:text-neutral-100 leading-tight">
+                                    class="text-base font-semibold text-neutral-900 leading-tight">
                                     {{ $category->name }}</h3>
                             </div>
                             <div class="flex-shrink-0">
                                 <x-dropdown position="bottom-end" accent>
                                     <x-slot name="trigger">
                                         <button
-                                            class="cursor-pointer rounded-md border border-neutral-300 dark:border-neutral-600 p-2 transition duration-150 ease-in-out hover:bg-neutral-100 dark:hover:bg-neutral-700">
+                                            class="cursor-pointer rounded-md border border-neutral-300 p-2 transition duration-150 ease-in-out hover:bg-neutral-100">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="size-6">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -126,7 +126,7 @@
                                     </x-slot>
                                     <x-slot name="content">
                                         <a href="{{ route('categories.edit', $category) }}"
-                                            class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800">
+                                            class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="size-5">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -138,7 +138,7 @@
 
                                         <button type="submit"
                                             form="delete-form-{{ $category->id }}"
-                                            class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-red-500 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer">
+                                            class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-red-500 hover:bg-neutral-200 cursor-pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                 class="size-5">
@@ -156,7 +156,7 @@
                 </div>
             @empty
                 <div class="py-12 px-4 text-center">
-                    <div class="text-neutral-600 dark:text-neutral-200">
+                    <div class="text-neutral-600">
                         <p class="font-medium">Você ainda não criou nenhuma categoria</p>
                     </div>
                 </div>

@@ -13,9 +13,9 @@
         <div class="relative">
             {{-- Links esqueceu a senha --}}
             <a href="{{ route('password.request') }}"
-                class="absolute right-0 top-0 text-sm font-semibold text-zinc-700 dark:text-zinc-100
+                class="absolute right-0 top-0 text-sm font-semibold text-zinc-700
               underline underline-offset-4 decoration-zinc-700/30 hover:decoration-zinc-700
-              dark:decoration-zinc-100/30 dark:hover:decoration-zinc-100
+             
               transition-colors duration-300">
                 Esqueceu sua senha?
             </a>
@@ -39,7 +39,7 @@
 
     </form>
     {{-- Link para registrar --}}
-    <div class="text-center text-sm text-zinc-600 dark:text-zinc-400">
+    <div class="text-center text-sm text-zinc-600">
         <span>Não tem uma conta?</span>
         <x-link href="{{ route('register') }}">
             Criar Conta

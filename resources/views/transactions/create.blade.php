@@ -8,7 +8,7 @@
     </div>
 
     <div
-        class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-6 w-full border border-neutral-200 dark:border-neutral-700">
+        class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
         <form action="{{ route('transactions.store') }}" method="POST" class="space-y-4">
             @csrf
 
@@ -28,18 +28,18 @@
 
                 {{-- Tipo de Transação --}}
                 <fieldset class="mb-6">
-                    <legend class="text-sm font-semibold text-neutral-700 dark:text-neutral-100 mb-3">
+                    <legend class="text-sm font-semibold text-neutral-700 mb-3">
                         Tipo de Transação
                     </legend>
-                    <div class="flex gap-1 items-center bg-neutral-200 dark:bg-neutral-700 rounded-lg p-1">
+                    <div class="flex gap-1 items-center bg-neutral-200 rounded-lg p-1">
                         <label class="flex-1">
                             <input type="radio" name="transaction_type" value="single" x-model="transactionType"
                                 class="peer sr-only" />
                             <div
                                 class="flex flex-col items-center justify-center py-3 rounded-md transition-colors cursor-pointer
-                            peer-checked:bg-white peer-checked:dark:bg-neutral-900 peer-checked:shadow-sm
-                            peer-checked:text-neutral-900 peer-checked:dark:text-neutral-100
-                            text-neutral-700 dark:text-neutral-300">
+                            peer-checked:bg-white peer-checked:shadow-sm
+                            peer-checked:text-neutral-900
+                            text-neutral-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -54,9 +54,9 @@
                                 class="peer sr-only" />
                             <div
                                 class="flex flex-col items-center justify-center py-3 rounded-md transition-colors cursor-pointer
-                            peer-checked:bg-white peer-checked:dark:bg-neutral-900 peer-checked:shadow-sm
-                            peer-checked:text-neutral-900 peer-checked:dark:text-neutral-100
-                            text-neutral-700 dark:text-neutral-300">
+                            peer-checked:bg-white peer-checked:shadow-sm
+                            peer-checked:text-neutral-900
+                            text-neutral-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -71,9 +71,9 @@
                                 class="peer sr-only" />
                             <div
                                 class="flex flex-col items-center justify-center py-3 rounded-md transition-colors cursor-pointer
-                            peer-checked:bg-white peer-checked:dark:bg-neutral-900 peer-checked:shadow-sm
-                            peer-checked:text-neutral-900 peer-checked:dark:text-neutral-100
-                            text-neutral-700 dark:text-neutral-300">
+                            peer-checked:bg-white peer-checked:shadow-sm
+                            peer-checked:text-neutral-900
+                            text-neutral-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -88,17 +88,17 @@
 
                 {{-- Receita ou Despesa --}}
                 <fieldset class="mb-6">
-                    <legend class="text-sm font-semibold text-neutral-700 dark:text-neutral-100 mb-3">
+                    <legend class="text-sm font-semibold text-neutral-700 mb-3">
                         Receita ou Despesa
                     </legend>
-                    <div class="flex gap-2 items-center bg-neutral-200 dark:bg-neutral-700 rounded-lg p-1">
+                    <div class="flex gap-2 items-center bg-neutral-200 rounded-lg p-1">
                         <label class="flex-1">
                             <input type="radio" name="type" value="income" x-model="type" class="peer sr-only" />
                             <div
                                 class="flex flex-col items-center justify-center py-3 rounded-md transition-colors cursor-pointer
-                            peer-checked:bg-white peer-checked:dark:bg-neutral-900 peer-checked:shadow-sm
-                            peer-checked:text-green-600 peer-checked:dark:text-green-400
-                            text-green-600 dark:text-green-400 hover:text-green-700 dark:hover:text-green-300">
+                            peer-checked:bg-white peer-checked:shadow-sm
+                            peer-checked:text-green-600
+                            text-green-600 hover:text-green-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -111,9 +111,9 @@
                             <input type="radio" name="type" value="expense" x-model="type" class="peer sr-only" />
                             <div
                                 class="flex flex-col items-center justify-center py-3 rounded-md transition-colors cursor-pointer
-                            peer-checked:bg-white peer-checked:dark:bg-neutral-900 peer-checked:shadow-sm
-                            peer-checked:text-red-600 peer-checked:dark:text-red-400
-                            text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300">
+                            peer-checked:bg-white peer-checked:shadow-sm
+                            peer-checked:text-red-600
+                            text-red-600 hover:text-red-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -185,14 +185,14 @@
                 {{-- Informações contextuais --}}
                 <div x-show="transactionType !== 'single'" x-transition class="p-4 rounded-lg border-l-4"
                     :class="{
-                        'bg-blue-50 dark:bg-blue-900/20 border-blue-400 dark:border-blue-600': transactionType === 'recurring',
-                        'bg-green-50 dark:bg-green-900/20 border-green-400 dark:border-green-600': transactionType === 'installment'
+                        'bg-blue-50 border-blue-400': transactionType === 'recurring',
+                        'bg-green-50 border-green-400': transactionType === 'installment'
                     }">
                     <div class="flex">
                         <svg class="w-5 h-5 mt-0.5 mr-3"
                             :class="{
-                                'text-blue-600 dark:text-blue-400': transactionType === 'recurring',
-                                'text-green-600 dark:text-green-400': transactionType === 'installment'
+                                'text-blue-600': transactionType === 'recurring',
+                                'text-green-600': transactionType === 'installment'
                             }"
                             fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
@@ -200,11 +200,11 @@
                                 clip-rule="evenodd"></path>
                         </svg>
                         <div class="text-sm">
-                            <p x-show="transactionType === 'recurring'" class="text-blue-800 dark:text-blue-200">
+                            <p x-show="transactionType === 'recurring'" class="text-blue-800">
                                 <strong>Transação Recorrente:</strong> Será criada uma transação para cada mês durante o
                                 período especificado.
                             </p>
-                            <p x-show="transactionType === 'installment'" class="text-green-800 dark:text-green-200">
+                            <p x-show="transactionType === 'installment'" class="text-green-800">
                                 <strong>Transação Parcelada:</strong> O valor total será dividido automaticamente pelo
                                 número de parcelas.
                             </p>

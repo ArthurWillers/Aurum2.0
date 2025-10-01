@@ -34,7 +34,7 @@
         </x-button>
 
         {{-- Link para login --}}
-        <div class="text-center text-sm text-zinc-600 dark:text-zinc-400">
+        <div class="text-center text-sm text-zinc-600">
             <span>Já tem uma conta?</span>
             <x-link href="{{ route('login') }}">
                 Fazer Login

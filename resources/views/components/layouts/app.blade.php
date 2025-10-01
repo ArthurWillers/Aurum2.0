@@ -5,11 +5,11 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen antialiased bg-neutral-50 dark:bg-neutral-900 text-neutral-900 dark:text-white">
+<body class="min-h-screen antialiased bg-neutral-50 text-neutral-900">
 
     <div x-data="{ open: false }">
         <aside
-            class="fixed top-0 left-0 h-screen w-64 border-e bg-neutral-100 dark:bg-neutral-950 border-neutral-300 dark:border-neutral-800 p-4 flex flex-col gap-4 z-40 transition-transform duration-300 ease-in-out lg:translate-x-0"
+            class="fixed top-0 left-0 h-screen w-64 border-e bg-neutral-100 border-neutral-300 p-4 flex flex-col gap-4 z-40 transition-transform duration-300 ease-in-out lg:translate-x-0"
             :class="{ '-translate-x-full': !open }" x-cloak>
             <div class="flex items-center">
                 <a href="{{ route('dashboard') }}">
@@ -17,7 +17,7 @@
                 </a>
 
                 <button @click="open = !open"
-                    class="ms-auto lg:hidden cursor-pointer p-1 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-700">
+                    class="ms-auto lg:hidden cursor-pointer p-1 rounded-md hover:bg-neutral-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d=" M6 18 18 6M6 6l12 12" />
@@ -82,15 +82,15 @@
             <x-dropdown position="top" class="mt-auto hidden lg:block" accent contentClass="w-full">
                 <x-slot name="trigger">
                     <button
-                        class="w-full flex items-center rounded-lg p-1 hover:bg-neutral-800/5 dark:hover:bg-white/10 group cursor-pointer">
+                        class="w-full flex items-center rounded-lg p-1 hover:bg-neutral-800/5 group cursor-pointer">
                         <div
-                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300 dark:bg-neutral-600 dark:border-neutral-500">
+                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300">
                             {{ auth()->user()->initials() }}
                         </div>
                         <span
-                            class="mx-2 text-sm font-medium truncate dark:text-white/80 dark:group-hover:text-white text-neutral-800/80 group-hover:text-neutral-800">{{ auth()->user()->name }}</span>
+                            class="mx-2 text-sm font-medium truncate text-neutral-800/80 group-hover:text-neutral-800">{{ auth()->user()->name }}</span>
                         <div
-                            class="ms-auto dark:text-white/80 dark:group-hover:text-white text-neutral-800/80 group-hover:text-neutral-800">
+                            class="ms-auto text-neutral-800/80 group-hover:text-neutral-800">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -102,21 +102,21 @@
                 <x-slot name="content">
                     <div class="flex items-center gap-2 p-2">
                         <div
-                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300 dark:bg-neutral-600 dark:border-neutral-500">
+                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300">
                             {{ auth()->user()->initials() }}
                         </div>
                         <div class="truncate">
-                            <div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 truncate">
+                            <div class="text-sm font-semibold text-neutral-800 truncate">
                                 {{ auth()->user()->name }}</div>
-                            <div class="text-xs text-neutral-500 dark:text-neutral-400 truncate">
+                            <div class="text-xs text-neutral-500 truncate">
                                 {{ auth()->user()->email }}</div>
                         </div>
                     </div>
 
-                    <hr class="my-1 border-neutral-300 dark:border-neutral-700">
+                    <hr class="my-1 border-neutral-300">
 
                     <a href="{{ route('settings') }}" @click="open = !open"
-                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800">
+                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -129,7 +129,7 @@
                     <form method="POST" id="logout" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit" @click="open = !open"
-                            class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-red-500 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer">
+                            class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-red-500 hover:bg-neutral-200 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                                 class="size-5">
                                 <path fill-rule="evenodd"
@@ -152,7 +152,7 @@
 
         <header class="flex items-center px-6 w-full min-h-14 lg:hidden">
             <button @click="open = !open"
-                class="cursor-pointer rounded-lg p-1 hover:bg-neutral-200 dark:hover:bg-neutral-800">
+                class="cursor-pointer rounded-lg p-1 hover:bg-neutral-200">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -163,14 +163,14 @@
             <x-dropdown position="bottom-end" class="ms-auto" accent contentClass="w-60">
                 <x-slot name="trigger">
                     <button
-                        class="w-full flex items-center rounded-lg p-1 hover:bg-neutral-800/5 dark:hover:bg-white/10 group cursor-pointer gap-2">
+                        class="w-full flex items-center rounded-lg p-1 hover:bg-neutral-800/5 group cursor-pointer gap-2">
                         <div
-                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300 dark:bg-neutral-600 dark:border-neutral-500">
+                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300">
                             {{ auth()->user()->initials() }}
                         </div>
 
                         <div
-                            class="ms-auto dark:text-white/80 dark:group-hover:text-white text-neutral-800/80 group-hover:text-neutral-800">
+                            class="ms-auto text-neutral-800/80 group-hover:text-neutral-800">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                                 class="size-4">
                                 <path fill-rule="evenodd"
@@ -184,21 +184,21 @@
                 <x-slot name="content">
                     <div class="flex items-center gap-2 p-2">
                         <div
-                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300 dark:bg-neutral-600 dark:border-neutral-500">
+                            class="shrink-0 border rounded-md p-1 font-medium bg-neutral-200 border-neutral-300">
                             {{ auth()->user()->initials() }}
                         </div>
                         <div class="truncate">
-                            <div class="text-sm font-semibold text-neutral-800 dark:text-neutral-200 truncate">
+                            <div class="text-sm font-semibold text-neutral-800 truncate">
                                 {{ auth()->user()->name }}</div>
-                            <div class="text-xs text-neutral-500 dark:text-neutral-400 truncate">
+                            <div class="text-xs text-neutral-500 truncate">
                                 {{ auth()->user()->email }}</div>
                         </div>
                     </div>
 
-                    <hr class="my-1 border-neutral-300 dark:border-neutral-700">
+                    <hr class="my-1 border-neutral-300">
 
                     <a href="{{ route('settings') }}" @click="open = !open"
-                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200 dark:text-neutral-200 dark:hover:bg-neutral-800">
+                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-neutral-700 hover:bg-neutral-200">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor" class="size-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -210,7 +210,7 @@
                     </a>
 
                     <button type="submit" form="logout" @click="open = !open"
-                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-red-500 hover:bg-neutral-200 dark:hover:bg-neutral-800 cursor-pointer">
+                        class="flex w-full items-center gap-2 rounded-md px-2 py-2 text-left text-sm text-red-500 hover:bg-neutral-200 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                             class="size-5">
                             <path fill-rule="evenodd"

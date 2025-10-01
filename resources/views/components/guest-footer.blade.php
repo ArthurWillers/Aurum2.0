@@ -1,6 +1,6 @@
 <footer class="w-full shrink-0 mt-8">
     <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 sm:flex-row">
-        <div class="text-sm text-zinc-700 dark:text-zinc-200">
+        <div class="text-sm text-zinc-700">
             Desenvolvido por <x-link href="https://github.com/ArthurWillers" target="_blank">ArthurWillers</x-link>
         </div>
         <div class="flex items-center gap-x-6">

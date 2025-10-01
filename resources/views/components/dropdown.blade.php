@@ -25,10 +25,10 @@
 
     {{-- Slot para o conteudo --}}
     <div x-show="open" x-transition x-cloak @class([
-        'absolute z-50 rounded-lg border bg-white p-1 shadow-lg dark:bg-neutral-900',
+        'absolute z-50 rounded-lg border bg-white p-1 shadow-lg',
         $dropdownPosition,
         'border-accent' => $accent,
-        'border-neutral-300 dark:border-neutral-700' => !$accent,
+        'border-neutral-300' => !$accent,
         $contentClass,
     ])>
         {{ $content }}

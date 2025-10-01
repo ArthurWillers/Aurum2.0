@@ -5,7 +5,7 @@
 
 @php
     // Classes de cor e base, agora fixas no estilo zinc
-    $baseClasses = 'font-semibold transition-colors duration-300 text-zinc-700 dark:text-zinc-100 decoration-zinc-700/30 dark:decoration-zinc-100/30 hover:decoration-zinc-700 dark:hover:decoration-zinc-100';
+    $baseClasses = 'font-semibold transition-colors duration-300 text-zinc-700 decoration-zinc-700/30 hover:decoration-zinc-700';
 
     // Classes de variante (com ou sem sublinhado inicial)
     $variantClasses = match ($variant) {

@@ -8,14 +8,14 @@
     </div>
 
     <div
-        class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg p-6 w-full border border-neutral-200 dark:border-neutral-700">
+        class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
         <form action="{{ route('categories.store') }}" method="POST" class="space-y-4">
             @csrf
             <x-form-input label="Nome" name="name" id="name" placeholder="Ex: Salário, Supermercado, Lazer"
                 :value="old('name')" autofocus />
 
             <fieldset class="mb-9">
-                <legend class="text-sm font-semibold text-neutral-700 dark:text-neutral-100 mb-2">
+                <legend class="text-sm font-semibold text-neutral-700 mb-2">
                     Tipo
                 </legend>
                 <div class="space-y-3">
