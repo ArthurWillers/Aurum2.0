@@ -12,7 +12,7 @@ class AccountController extends Controller
      */
     public function destroy(Request $request)
     {
-        $user = Auth::user();
+        Auth::user()->delete();
 
         // Fazer logout
         Auth::logout();
@@ -20,14 +20,6 @@ class AccountController extends Controller
         // Invalidar a sessão antiga
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-
-        // Deletar o usuário
-        $user->delete();
-
-        // Iniciar uma nova sessão para a mensagem
-        $request->session()->regenerate();
-        $request->session()->flash('status', 'Sua conta foi deletada com sucesso.');
-
-        return redirect('/');
+        return redirect('/login')->with('status', 'Sua conta foi deletada com sucesso.');
     }
 }
