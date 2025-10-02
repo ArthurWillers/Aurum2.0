@@ -6,12 +6,15 @@ use App\Http\Controllers\MonthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\SettingsController;
 
 Route::redirect('/', '/login');
 
 Route::middleware('auth')->group(function () {
   Route::get('/dashboard', DashboardController::class)->name('dashboard');
-  Route::view('/settings', 'settings')->name('settings'); // temporário
+  Route::get('/settings', SettingsController::class)->name('settings');
+  Route::delete('/account', [AccountController::class, 'destroy'])->name('account.destroy')->middleware(['password.confirm']);
 
   Route::post('/update-month', MonthController::class)->name('month.update');
 
