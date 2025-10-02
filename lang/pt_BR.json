@@ -12,5 +12,6 @@
   "Reset Password": "Redefinir Senha",
   "This password reset link will expire in :count minutes.": "Este link para redefinição de senha expirará em :count minutos.",
   "If you did not request a password reset, no further action is required.": "Se você não solicitou a redefinição de senha, nenhuma ação adicional é necessária.",
-  "Reset Password Notification": "Notificação de Redefinição de Senha"
+  "Reset Password Notification": "Notificação de Redefinição de Senha",
+  "The provided password was incorrect.": "A senha fornecida está incorreta."
 }
