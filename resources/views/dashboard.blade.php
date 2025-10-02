@@ -121,7 +121,10 @@
                                 <div class="flex items-baseline justify-between mb-2 gap-2">
                                     <div class="flex-1 min-w-0">
                                         <h4 class="text-base font-semibold text-neutral-800 truncate">
-                                            {{ $item['category']->name }}
+                                            <a href="{{ route('expenses.index', ['category_id' => $item['category']->id]) }}"
+                                                class="hover:text-red-600 hover:underline transition-colors">
+                                                {{ $item['category']->name }}
+                                            </a>
                                         </h4>
                                         <p class="text-sm text-neutral-500">
                                             {{ number_format($percentage, 1) }}% do total
@@ -182,7 +185,10 @@
                                 <div class="flex items-baseline justify-between mb-2 gap-2">
                                     <div class="flex-1 min-w-0">
                                         <h4 class="text-base font-semibold text-neutral-800 truncate">
-                                            {{ $item['category']->name }}
+                                            <a href="{{ route('incomes.index', ['category_id' => $item['category']->id]) }}"
+                                                class="hover:text-green-600 hover:underline transition-colors">
+                                                {{ $item['category']->name }}
+                                            </a>
                                         </h4>
                                         <p class="text-sm text-neutral-500">
                                             {{ number_format($percentage, 1) }}% do total
