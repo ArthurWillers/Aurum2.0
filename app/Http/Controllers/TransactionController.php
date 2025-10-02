@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTransactionRequest;
 use App\Http\Requests\UpdateTransactionRequest;
+use App\Models\Category;
 use App\Models\Transaction;
+use Carbon\Carbon;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
     use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, String $type)
+    public function index(Request $request, string $type)
     {
         $this->authorize('viewAny', Transaction::class);
 
@@ -34,7 +36,15 @@ class TransactionController extends Controller
 
         // Aplica filtro por categoria se fornecido
         if ($request->filled('category_id')) {
-            $query->where('category_id', $request->category_id);
+            // Verificar se a categoria pertence ao usuário e é do tipo correto
+            $category = Category::find($request->category_id);
+
+            if ($category &&
+                $category->user_id === Auth::id() &&
+                $category->type === $type) {
+                // Só aplica o filtro se a categoria for válida para este usuário e tipo
+                $query->where('category_id', $request->category_id);
+            }
         }
 
         // Verifica se deve usar paginação
@@ -70,6 +80,7 @@ class TransactionController extends Controller
         $categories = Auth::user()->categories()->orderBy('name')->get();
 
         $backRoute = $type === 'income' ? 'incomes.index' : ($type === 'expense' ? 'expenses.index' : 'dashboard');
+
         return view('transactions.create', compact('categories', 'type', 'backRoute'));
     }
 
@@ -134,7 +145,7 @@ class TransactionController extends Controller
 
         return redirect()->route($route)->with('toast', [
             'message' => 'Transação atualizada com sucesso!',
-            'type' => 'success'
+            'type' => 'success',
         ]);
     }
 
