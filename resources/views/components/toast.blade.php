@@ -27,28 +27,25 @@
             x-transition:enter-start="translate-x-full opacity-0" x-transition:enter-end="translate-x-0 opacity-100"
             x-transition:leave="transition ease-in duration-200 transform"
             x-transition:leave-start="translate-x-0 opacity-100" x-transition:leave-end="translate-x-full opacity-0"
-            class="w-full max-w-sm rounded-lg shadow-lg border border-accent bg-white overflow-hidden pointer-events-auto">
+            class="w-full max-w-sm rounded-lg shadow-lg border border-neutral-300 bg-white overflow-hidden pointer-events-auto">
             <div class="flex items-center gap-4 p-4">
                 {{-- Ícone --}}
                 @if ($type === 'success')
-                    <div
-                        class="flex items-center justify-center w-8 h-8 bg-green-100 rounded-full flex-shrink-0">
+                    <div class="flex items-center justify-center w-8 h-8 bg-green-100 rounded-full flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-5 h-5 text-green-600">
                             <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                         </svg>
                     </div>
                 @elseif ($type === 'error')
-                    <div
-                        class="flex items-center justify-center w-8 h-8 bg-red-100 rounded-full flex-shrink-0">
+                    <div class="flex items-center justify-center w-8 h-8 bg-red-100 rounded-full flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-5 h-5 text-red-600">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
                     </div>
                 @elseif ($type === 'warning')
-                    <div
-                        class="flex items-center justify-center w-8 h-8 bg-yellow-100 rounded-full flex-shrink-0">
+                    <div class="flex items-center justify-center w-8 h-8 bg-yellow-100 rounded-full flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-5 h-5 text-yellow-600">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -56,8 +53,7 @@
                         </svg>
                     </div>
                 @else
-                    <div
-                        class="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full flex-shrink-0">
+                    <div class="flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full flex-shrink-0">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="w-5 h-5 text-blue-600">
                             <path stroke-linecap="round" stroke-linejoin="round"
