@@ -9,12 +9,13 @@
             {{ $attributes->merge(['class' => 'peer sr-only']) }} />
 
         {{-- Checkbox Visual --}}
-        <div class="flex h-[1.125rem] w-[1.125rem] shrink-0 items-center justify-center rounded-sm border
-                    border-zinc-300
+        <div
+            class="flex h-[1.125rem] w-[1.125rem] shrink-0 items-center justify-center rounded-sm border
+                    border-neutral-300
                     bg-white
                     shadow-xs transition-colors duration-200
-                    peer-checked:border-zinc-900
-                    peer-checked:bg-zinc-900
+                    peer-checked:border-neutral-900
+                    peer-checked:bg-neutral-900
                     text-transparent peer-checked:text-white">
 
             <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
@@ -25,12 +26,12 @@
         </div>
 
         @if ($label)
-            <span class="text-sm font-medium text-zinc-700">
+            <span class="text-sm font-medium text-neutral-700">
                 {{ $label }}
             </span>
         @endif
     </label>
 
     {{-- Mensagem de Erro --}}
-    <x-form-error :name="$name" class="!mt-3"/>
+    <x-form-error :name="$name" class="!mt-3" />
 </div>

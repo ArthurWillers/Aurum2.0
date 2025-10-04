@@ -3,7 +3,8 @@
 
     <x-auth-session-status :status="session('status')" />
 
-    <form action="{{ route('register.store') }}" method="POST" class="space-y-6" x-data="{ loading: false }" @submit="loading = true">
+    <form action="{{ route('register.store') }}" method="POST" class="space-y-6" x-data="{ loading: false }"
+        @submit="loading = true">
         @csrf
 
         {{-- Nome --}}
@@ -34,7 +35,7 @@
         </x-button>
 
         {{-- Link para login --}}
-        <div class="text-center text-sm text-zinc-600">
+        <div class="text-center text-sm text-neutral-600">
             <span>Já tem uma conta?</span>
             <x-link href="{{ route('login') }}">
                 Fazer Login

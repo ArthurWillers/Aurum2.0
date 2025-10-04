@@ -4,8 +4,8 @@
 ])
 
 @php
-    // Classes de cor e base, agora fixas no estilo zinc
-    $baseClasses = 'font-semibold transition-colors duration-300 text-zinc-700 decoration-zinc-700/30 hover:decoration-zinc-700';
+    $baseClasses =
+        'font-semibold transition-colors duration-300 text-neutral-700 decoration-neutral-700/30 hover:decoration-neutral-700';
 
     // Classes de variante (com ou sem sublinhado inicial)
     $variantClasses = match ($variant) {
@@ -16,6 +16,6 @@
     $finalClasses = implode(' ', [$baseClasses, $variantClasses]);
 @endphp
 
-<a {{ $attributes->merge(['class' => $finalClasses])}}>
+<a {{ $attributes->merge(['class' => $finalClasses]) }}>
     {{ $slot }}
 </a>

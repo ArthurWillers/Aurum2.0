@@ -11,17 +11,17 @@
 
 @php
     $baseClasses =
-        'w-full border appearance-none text-sm rounded-xl block py-2.5 px-4 bg-white disabled:shadow-none shadow-xs focus:shadow-lg text-zinc-700 disabled:text-zinc-400 placeholder-zinc-400 disabled:placeholder-zinc-400/70 outline-none focus:border-accent focus:ring-2 focus:ring-accent/40 transition-colors duration-300';
+        'w-full border appearance-none text-sm rounded-xl block py-2.5 px-4 bg-white disabled:shadow-none shadow-xs focus:shadow-lg text-neutral-700 disabled:text-neutral-400 placeholder-neutral-400 disabled:placeholder-neutral-400/70 outline-none focus:border-accent focus:ring-2 focus:ring-accent/40 transition-colors duration-300';
     $errorClasses = $errors->has($name)
         ? 'border-red-500 focus:border-red-500 focus:ring-red-400/30'
-        : 'border-zinc-200';
+        : 'border-neutral-200';
     $classes = $baseClasses . ' ' . $errorClasses;
 @endphp
 
 <div class="grid w-full items-center gap-1.5">
 
     <label for="{{ $name }}"
-        class="inline-flex items-center text-sm font-semibold text-zinc-700 {{ $labelClass }}">
+        class="inline-flex items-center text-sm font-semibold text-neutral-700 {{ $labelClass }}">
         {{ $label }}
     </label>
 
@@ -37,9 +37,9 @@
                 inputmode="decimal" @endif />
 
         @if ($viewable)
-            <div class="absolute top-0 bottom-0 flex items-center gap-x-1.5 pe-3 end-0 text-xs text-zinc-400">
+            <div class="absolute top-0 bottom-0 flex items-center gap-x-1.5 pe-3 end-0 text-xs text-neutral-400">
                 <button type="button" x-on:click="show = !show"
-                    class="relative items-center font-medium justify-center gap-2 whitespace-nowrap disabled:opacity-75 disabled:cursor-default disabled:pointer-events-none h-8 text-sm rounded-md w-8 inline-flex -ms-1.5 -me-1.5 bg-transparent hover:bg-zinc-800/5 text-zinc-500 hover:text-zinc-800 transition-colors duration-300 cursor-pointer">
+                    class="relative items-center font-medium justify-center gap-2 whitespace-nowrap disabled:opacity-75 disabled:cursor-default disabled:pointer-events-none h-8 text-sm rounded-md w-8 inline-flex -ms-1.5 -me-1.5 bg-transparent hover:bg-neutral-800/5 text-neutral-500 hover:text-neutral-800 transition-colors duration-300 cursor-pointer">
                     {{-- Ícone de "escondido" (olho cortado) --}}
                     <svg x-show="!show" xmlns="http://www.w.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                         class="size-4">

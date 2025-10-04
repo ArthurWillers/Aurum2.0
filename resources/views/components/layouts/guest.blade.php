@@ -5,7 +5,7 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen antialiased bg-natural-50">
+<body class="min-h-screen antialiased bg-neutral-50">
     <div class="flex min-h-svh flex-col">
         <div class="bg-background flex flex-1 flex-col items-center justify-center gap-6 p-6 md:p-10">
             <div class="flex w-full max-w-sm flex-col gap-2">

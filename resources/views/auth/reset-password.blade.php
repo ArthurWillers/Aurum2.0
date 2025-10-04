@@ -3,7 +3,8 @@
 
     <x-auth-session-status :status="session('status')" />
 
-    <form method="POST" action="{{ route('password.update') }}" class="space-y-6" x-data="{ loading: false }" @submit="loading = true">
+    <form method="POST" action="{{ route('password.update') }}" class="space-y-6" x-data="{ loading: false }"
+        @submit="loading = true">
         @csrf
 
         {{-- Token de Redefinição de Senha --}}
@@ -34,7 +35,7 @@
         </x-button>
 
         {{-- Link para login --}}
-        <div class="text-center text-sm text-zinc-600">
+        <div class="text-center text-sm text-neutral-600">
             <span>Lembrou sua senha?</span>
             <x-link href="{{ route('login') }}">
                 Fazer Login
