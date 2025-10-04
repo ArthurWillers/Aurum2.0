@@ -7,11 +7,9 @@
         </x-button>
     </div>
 
-    <div
-        class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
 
-        <div
-            class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded mb-4">
+        <div class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-md mb-6">
             <div class="flex">
                 <div class="py-1 self-center">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -28,7 +26,7 @@
             </div>
         </div>
 
-        <form action="{{ route('categories.update', $category) }}" method="POST" class="space-y-4"
+        <form action="{{ route('categories.update', $category) }}" method="POST" class="space-y-6"
             onsubmit="return confirm('Tem certeza que deseja salvar as alterações? Todas as transações relacionadas serão atualizadas.')">
             @csrf
             @method('PUT')

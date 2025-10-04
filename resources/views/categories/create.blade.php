@@ -7,9 +7,8 @@
         </x-button>
     </div>
 
-    <div
-        class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
-        <form action="{{ route('categories.store') }}" method="POST" class="space-y-4">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
+        <form action="{{ route('categories.store') }}" method="POST" class="space-y-6">
             @csrf
             <x-form-input label="Nome" name="name" id="name" placeholder="Ex: Salário, Supermercado, Lazer"
                 :value="old('name')" autofocus />

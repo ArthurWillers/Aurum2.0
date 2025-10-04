@@ -7,13 +7,11 @@
         </x-button>
     </div>
 
-    <div
-        class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
 
         {{-- Aviso para transações parceladas/recorrentes --}}
         @if ($transaction->total_installments || $transaction->transaction_group_uuid)
-            <div
-                class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded mb-6">
+            <div class="bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-md mb-6">
                 <div class="flex">
                     <div class="py-1 self-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -36,7 +34,7 @@
             @csrf
             @method('PUT')
 
-            <div class="space-y-4 mb-9"
+            <div class="space-y-6 mb-9"
                 x-data='{
                 type: @json(old('type', $transaction->type)),
                 categories: @json($categories ?? []),
@@ -46,7 +44,7 @@
             }'>
                 {{-- Receita ou Despesa --}}
                 <fieldset class="mb-6">
-                    <legend class="text-sm font-semibold text-neutral-700 mb-3">
+                    <legend class="text-sm font-semibold text-neutral-700 mb-4">
                         Receita ou Despesa
                     </legend>
                     <div class="flex gap-2 items-center bg-neutral-200 rounded-lg p-1">

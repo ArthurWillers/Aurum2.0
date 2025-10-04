@@ -14,7 +14,7 @@
     {{-- Conteúdo --}}
     <div class="space-y-8 lg:mb-5">
         {{-- Cards de Resumo --}}
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             @php
                 $selectedMonth = session('selected_month', now()->format('Y-m'));
                 $monthYear = \Carbon\Carbon::parse($selectedMonth)->locale('pt_BR')->isoFormat('MMMM [de] YYYY');
@@ -25,12 +25,12 @@
                 class="bg-white rounded-lg shadow-lg p-6 border border-neutral-200 hover:shadow-xl transition-shadow duration-200 block">
                 <div class="flex items-center justify-between">
                     <div class="flex-1">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                             <p class="text-sm font-medium text-neutral-600">Receitas de
                                 {{ ucfirst($monthYear) }}</p>
                             @if ($incomesChange != 0)
                                 <span
-                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{ $incomesChange > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} max-w-fit"
+                                    class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium {{ $incomesChange > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} max-w-fit"
                                     title="R$ {{ number_format(abs($incomesDiff), 2, ',', '.') }} {{ $incomesDiff > 0 ? 'a mais' : 'a menos' }} que o mês anterior">
                                     @if ($incomesChange > 0)
                                         <svg class="w-3 h-3 mr-0.5 flex-shrink-0" fill="currentColor"
@@ -72,12 +72,12 @@
                 class="bg-white rounded-lg shadow-lg p-6 border border-neutral-200 hover:shadow-xl transition-shadow duration-200 block">
                 <div class="flex items-center justify-between">
                     <div class="flex-1">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                             <p class="text-sm font-medium text-neutral-600">Despesas de
                                 {{ ucfirst($monthYear) }}</p>
                             @if ($expensesChange != 0)
                                 <span
-                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{ $expensesChange > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800' }} max-w-fit"
+                                    class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium {{ $expensesChange > 0 ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800' }} max-w-fit"
                                     title="R$ {{ number_format(abs($expensesDiff), 2, ',', '.') }} {{ $expensesDiff > 0 ? 'a mais' : 'a menos' }} que o mês anterior">
                                     @if ($expensesChange > 0)
                                         <svg class="w-3 h-3 mr-0.5 flex-shrink-0" fill="currentColor"
@@ -117,12 +117,12 @@
             <div class="bg-white rounded-lg shadow-lg p-6 border border-neutral-200">
                 <div class="flex items-center justify-between">
                     <div class="flex-1">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-1">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
                             <p class="text-sm font-medium text-neutral-600">Saldo de
                                 {{ ucfirst($monthYear) }}</p>
                             @if ($balanceChange != 0)
                                 <span
-                                    class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{ $balanceChange > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} max-w-fit"
+                                    class="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium {{ $balanceChange > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }} max-w-fit"
                                     title="R$ {{ number_format(abs($balanceDiff), 2, ',', '.') }} {{ $balanceDiff > 0 ? 'a mais' : 'a menos' }} que o mês anterior">
                                     @if ($balanceChange > 0)
                                         <svg class="w-3 h-3 mr-0.5 flex-shrink-0" fill="currentColor"
@@ -166,8 +166,8 @@
             <div class="bg-white rounded-lg shadow-lg p-6 border border-neutral-200">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6 text-red-600">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
                         </svg>

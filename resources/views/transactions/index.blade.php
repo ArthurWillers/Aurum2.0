@@ -13,7 +13,7 @@
     </div>
 
     {{-- Filtros --}}
-    <div class="mb-4">
+    <div class="mb-6">
         <form method="GET" action="{{ $type === 'income' ? route('incomes.index') : route('expenses.index') }}"
             class="flex flex-col sm:flex-row gap-4 sm:items-end">
             <div class="flex-1 w-full">
@@ -29,7 +29,7 @@
             </div>
 
             {{-- Botões de ação - Mobile e Desktop --}}
-            <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:items-center">
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-center">
                 @if (request('category_id'))
                     <a href="{{ $type === 'income' ? route('incomes.index') : route('expenses.index') }}"
                         class="inline-flex items-center justify-center px-3 py-2 text-sm text-neutral-600 hover:text-neutral-900 sm:mb-1">
@@ -70,23 +70,23 @@
         </form>
     </div>
 
-    <div class="w-full rounded-lg shadow-xl border border-neutral-200 bg-white">
+    <div class="w-full rounded-lg shadow-xl border border-neutral-200 bg-white {{ !request('paginate') || !method_exists($transactions, 'hasPages') || !$transactions->hasPages() ? 'lg:mb-8' : '' }}">
 
         {{-- Header - Desktop --}}
         <div class="hidden sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr_0.5fr] border-b border-neutral-200">
-            <div class="px-4 lg:px-6 py-3 text-left">
+            <div class="px-4 lg:px-6 py-4 text-left">
                 <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Descrição</span>
             </div>
-            <div class="px-4 lg:px-6 py-3 text-left">
+            <div class="px-4 lg:px-6 py-4 text-left">
                 <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Categoria</span>
             </div>
-            <div class="px-4 lg:px-6 py-3 text-left">
+            <div class="px-4 lg:px-6 py-4 text-left">
                 <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Data</span>
             </div>
-            <div class="px-4 lg:px-6 py-3 text-left">
+            <div class="px-4 lg:px-6 py-4 text-left">
                 <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Valor</span>
             </div>
-            <div class="px-4 lg:px-6 py-3 text-end">
+            <div class="px-4 lg:px-6 py-4 text-end">
                 <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Ações</span>
             </div>
         </div>

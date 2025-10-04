@@ -7,8 +7,7 @@
         </x-button>
     </div>
 
-    <div
-        class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
         <form action="{{ route('transactions.store') }}" method="POST" class="space-y-4">
             @csrf
 
@@ -16,7 +15,7 @@
             <input type="hidden" name="transaction_type" x-model="transactionType">
             <input type="hidden" name="type" x-model="type">
 
-            <div class="space-y-4 mb-9"
+            <div class="space-y-6 mb-9"
                 x-data='{
                 type: @json($type ?? 'expense'),
                 transactionType: "single",
@@ -28,10 +27,10 @@
 
                 {{-- Tipo de Transação --}}
                 <fieldset class="mb-6">
-                    <legend class="text-sm font-semibold text-neutral-700 mb-3">
-                        Tipo de Transação
+                    <legend class="text-sm font-semibold text-neutral-700 mb-4">
+                        Tipo de Movimento
                     </legend>
-                    <div class="flex gap-1 items-center bg-neutral-200 rounded-lg p-1">
+                    <div class="flex gap-2 items-center bg-neutral-200 rounded-lg p-1">
                         <label class="flex-1">
                             <input type="radio" name="transaction_type" value="single" x-model="transactionType"
                                 class="peer sr-only" />
