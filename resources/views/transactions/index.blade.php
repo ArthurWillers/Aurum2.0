@@ -43,18 +43,8 @@
 
                 {{-- Botão para alternar paginação --}}
                 <div class="sm:mb-1">
-                    @if (request('show_all'))
+                    @if (request('paginate'))
                         <a href="{{ ($type === 'income' ? route('incomes.index') : route('expenses.index')) . (request('category_id') ? '?category_id=' . request('category_id') : '') }}"
-                            class="inline-flex items-center justify-center w-full sm:w-auto px-3 py-2 text-sm bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                            </svg>
-                            Paginar
-                        </a>
-                    @else
-                        <a href="{{ ($type === 'income' ? route('incomes.index') : route('expenses.index')) . '?show_all=1' . (request('category_id') ? '&category_id=' . request('category_id') : '') }}"
                             class="inline-flex items-center justify-center w-full sm:w-auto px-3 py-2 text-sm bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
@@ -63,6 +53,16 @@
                             </svg>
                             Mostrar Todas
                         </a>
+                    @else
+                        <a href="{{ ($type === 'income' ? route('incomes.index') : route('expenses.index')) . '?paginate=1' . (request('category_id') ? '&category_id=' . request('category_id') : '') }}"
+                            class="inline-flex items-center justify-center w-full sm:w-auto px-3 py-2 text-sm bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                            Paginar
+                        </a>
                     @endif
                 </div>
             </div>
@@ -70,31 +70,24 @@
         </form>
     </div>
 
-    <div
-        class="w-full rounded-lg shadow-xl border border-neutral-200 bg-white">
+    <div class="w-full rounded-lg shadow-xl border border-neutral-200 bg-white">
 
         {{-- Header - Desktop --}}
-        <div
-            class="hidden sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr_0.5fr] border-b border-neutral-200">
+        <div class="hidden sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr_0.5fr] border-b border-neutral-200">
             <div class="px-4 lg:px-6 py-3 text-left">
-                <span
-                    class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Descrição</span>
+                <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Descrição</span>
             </div>
             <div class="px-4 lg:px-6 py-3 text-left">
-                <span
-                    class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Categoria</span>
+                <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Categoria</span>
             </div>
             <div class="px-4 lg:px-6 py-3 text-left">
-                <span
-                    class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Data</span>
+                <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Data</span>
             </div>
             <div class="px-4 lg:px-6 py-3 text-left">
-                <span
-                    class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Valor</span>
+                <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Valor</span>
             </div>
             <div class="px-4 lg:px-6 py-3 text-end">
-                <span
-                    class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Ações</span>
+                <span class="text-xs font-medium text-neutral-600 uppercase tracking-wider">Ações</span>
             </div>
         </div>
 
@@ -182,8 +175,7 @@
                                         {{ $transaction->date->format('d/m/Y') }}
                                     </span>
                                 </div>
-                                <h3
-                                    class="text-base font-semibold text-neutral-900 leading-tight mb-1">
+                                <h3 class="text-base font-semibold text-neutral-900 leading-tight mb-1">
                                     {{ $transaction->description }}
                                     @if ($transaction->total_installments)
                                         <span class="text-sm text-neutral-500 font-normal">
@@ -263,7 +255,7 @@
         </div>
     </div>
 
-    @if (!request('show_all') && method_exists($transactions, 'hasPages') && $transactions->hasPages())
+    @if (request('paginate') && method_exists($transactions, 'hasPages') && $transactions->hasPages())
         <div class="mt-1">
             {{ $transactions->links() }}
         </div>
