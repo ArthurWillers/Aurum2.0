@@ -130,13 +130,12 @@
                                             <path fill-rule="evenodd"
                                                 d="M5.293 9.707a1 1 0 010-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L11 7.414V15a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z"
                                                 clip-rule="evenodd" />
-                                        </svg>
-                                    @else
-                                        <svg class="w-3 h-3 mr-0.5 flex-shrink-0" fill="currentColor"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z"
-                                                clip-rule="evenodd" />
+                                        @else
+                                            <svg class="w-3 h-3 mr-0.5 flex-shrink-0" fill="currentColor"
+                                                viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M14.707 10.293a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 12.586V5a1 1 0 012 0v7.586l2.293-2.293a1 1 0 011.414 0z"
+                                                    clip-rule="evenodd" />
                                     @endif
                                     <span>R$ {{ number_format(abs($balanceDiff), 0, ',', '.') }}
                                         ({{ number_format(abs($balanceChange), 1) }}%)</span>
@@ -280,6 +279,33 @@
                     @endforeach
                 </div>
             </div>
+        @endif
+
+        {{-- Gráfico de Linhas - Histórico Mensal --}}
+        @if (!empty($chartData) && count($chartData) > 0)
+            <div class="bg-white rounded-lg shadow-lg p-6 border border-neutral-200">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-600">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-neutral-800">Evolução Financeira</h3>
+                </div>
+
+                <div class="relative" style="height: 300px;">
+                    <canvas id="financialEvolutionChart"></canvas>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const chartData = @json($chartData);
+                    window.initFinancialEvolutionChart(chartData);
+                });
+            </script>
         @endif
     </div>
 </x-layouts.app>

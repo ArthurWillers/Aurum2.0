@@ -94,6 +94,75 @@ class DashboardController extends Controller
             ->sortByDesc('total')
             ->values();
 
-        return view('dashboard', compact('incomes', 'expenses', 'expensesByCategory', 'incomesByCategory', 'incomesChange', 'expensesChange', 'balanceChange', 'incomesDiff', 'expensesDiff', 'balanceDiff'));
+        // Dados para o gráfico de evolução - 3 meses anteriores, atual e próximo
+        $chartData = $this->getFinancialEvolutionData();
+
+        return view('dashboard', compact('incomes', 'expenses', 'expensesByCategory', 'incomesByCategory', 'incomesChange', 'expensesChange', 'balanceChange', 'incomesDiff', 'expensesDiff', 'balanceDiff', 'chartData'));
+    }
+
+    /**
+     * Busca os dados de evolução financeira para o gráfico dos últimos 3 meses, mês atual e próximo mês
+     *
+     * @return array Dados formatados para o gráfico de evolução financeira
+     */
+    private function getFinancialEvolutionData()
+    {
+        // Obter o mês selecionado da sessão ou usar o mês atual
+        $selectedMonth = session('selected_month', now()->format('Y-m'));
+        $currentMonthDate = Carbon::parse($selectedMonth);
+
+        // Definir o intervalo de datas - 3 meses anteriores até o próximo mês (5 meses)
+        $startDate = $currentMonthDate->copy()->subMonths(3)->startOfMonth();
+        $endDate = $currentMonthDate->copy()->addMonth()->endOfMonth();
+
+        // Buscar todas as transações de uma vez para evitar múltiplas consultas
+        $transactions = Auth::user()->transactions()
+            ->select('type', 'amount', 'date')
+            ->whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')])
+            ->get();
+
+        // Preparar array para armazenar os dados por mês
+        $monthlyData = [];
+
+        // Processar os dados para cada mês no intervalo
+        $currentDate = clone $startDate;
+        while ($currentDate <= $endDate) {
+            $yearMonth = $currentDate->format('Y-m');
+            $monthFormatted = ucfirst($currentDate->locale('pt_BR')->isoFormat('MMMM/YYYY'));
+
+            // Inicializar dados do mês se ainda não existirem
+            if (! isset($monthlyData[$yearMonth])) {
+                $monthlyData[$yearMonth] = [
+                    'month' => $monthFormatted,
+                    'incomes' => 0,
+                    'expenses' => 0,
+                    'balance' => 0,
+                ];
+            }
+
+            // Avançar para o próximo mês
+            $currentDate->addMonth();
+        }
+
+        // Processar as transações e somá-las ao mês correspondente
+        foreach ($transactions as $transaction) {
+            $transactionMonth = Carbon::parse($transaction->date)->format('Y-m');
+
+            if (isset($monthlyData[$transactionMonth])) {
+                if ($transaction->type === 'income') {
+                    $monthlyData[$transactionMonth]['incomes'] += $transaction->amount;
+                } else {
+                    $monthlyData[$transactionMonth]['expenses'] += $transaction->amount;
+                }
+            }
+        }
+
+        // Calcular o saldo para cada mês
+        foreach ($monthlyData as &$data) {
+            $data['balance'] = $data['incomes'] - $data['expenses'];
+        }
+
+        // Retornar apenas os valores do array, mantendo a ordem
+        return array_values($monthlyData);
     }
 }
