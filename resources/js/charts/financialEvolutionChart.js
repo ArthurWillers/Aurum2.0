@@ -43,6 +43,7 @@ export function initFinancialEvolutionChart(chartData) {
           pointHoverRadius: 7,
           pointHoverBorderWidth: 3,
           tension: 0.4,
+          cubicInterpolationMode: 'monotone',
           fill: true,
           order: 2
         },
@@ -65,6 +66,7 @@ export function initFinancialEvolutionChart(chartData) {
           pointHoverRadius: 7,
           pointHoverBorderWidth: 3,
           tension: 0.4,
+          cubicInterpolationMode: 'monotone',
           fill: true,
           order: 3
         },
@@ -82,6 +84,7 @@ export function initFinancialEvolutionChart(chartData) {
           pointHoverRadius: 9,
           pointHoverBorderWidth: 4,
           tension: 0.4,
+          cubicInterpolationMode: 'monotone',
           fill: false,
           order: 1,
           shadowOffsetX: 3,
