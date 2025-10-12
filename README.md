@@ -20,7 +20,7 @@ O Aurum 2.0 é um sistema de código aberto projetado para quem busca uma maneir
 
 ## Documentação
 
-A documentação completa do projeto pode ser encontrada em: [https://arthurwillers.github.io/docs/aurum2.0](https://arthurwillers.github.io/docs/aurum2.0)
+A documentação (in)completa do projeto pode ser encontrada em: [https://arthurwillers.github.io/docs/aurum2.0](https://arthurwillers.github.io/docs/aurum2.0)
 
 ## Licença
 
