@@ -151,8 +151,4 @@
         </div>
     </div>
 
-    <div class="mt-2">
-        {{ $categories->links() }}
-    </div>
-
 </x-layouts.app>

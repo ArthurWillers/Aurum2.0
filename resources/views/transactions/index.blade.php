@@ -28,49 +28,24 @@
                 </x-form-select>
             </div>
 
-            {{-- Botões de ação - Mobile e Desktop --}}
-            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:items-center">
-                @if (request('category_id'))
+            {{-- Botão de ação - Limpar filtro --}}
+            @if (request('category_id'))
+                <div class="sm:mb-1">
                     <a href="{{ $type === 'income' ? route('incomes.index') : route('expenses.index') }}"
-                        class="inline-flex items-center justify-center px-3 py-2 text-sm text-neutral-600 hover:text-neutral-900 sm:mb-1">
+                        class="inline-flex items-center justify-center px-3 py-2 text-sm text-neutral-600 hover:text-neutral-900">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-4 mr-1">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                         Limpar filtro
                     </a>
-                @endif
-
-                {{-- Botão para alternar paginação --}}
-                <div class="sm:mb-1">
-                    @if (request('paginate'))
-                        <a href="{{ ($type === 'income' ? route('incomes.index') : route('expenses.index')) . (request('category_id') ? '?category_id=' . request('category_id') : '') }}"
-                            class="inline-flex items-center justify-center w-full sm:w-auto px-3 py-2 text-sm bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
-                            </svg>
-                            Mostrar Todas
-                        </a>
-                    @else
-                        <a href="{{ ($type === 'income' ? route('incomes.index') : route('expenses.index')) . '?paginate=1' . (request('category_id') ? '&category_id=' . request('category_id') : '') }}"
-                            class="inline-flex items-center justify-center w-full sm:w-auto px-3 py-2 text-sm bg-neutral-100 text-neutral-700 rounded-md hover:bg-neutral-200">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="1.5" stroke="currentColor" class="size-4 mr-1">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0ZM3.75 12h.007v.008H3.75V12Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm-.375 5.25h.007v.008H3.75v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                            </svg>
-                            Paginar
-                        </a>
-                    @endif
                 </div>
-            </div>
+            @endif
 
         </form>
     </div>
 
-    <div class="w-full rounded-lg shadow-xl border border-neutral-200 bg-white {{ !request('paginate') || !method_exists($transactions, 'hasPages') || !$transactions->hasPages() ? 'lg:mb-8' : '' }}">
+    <div class="w-full rounded-lg shadow-xl border border-neutral-200 bg-white lg:mb-8">
 
         {{-- Header - Desktop --}}
         <div class="hidden sm:grid sm:grid-cols-[2fr_1fr_1fr_1fr_0.5fr] border-b border-neutral-200">
@@ -254,11 +229,5 @@
             @endforelse
         </div>
     </div>
-
-    @if (request('paginate') && method_exists($transactions, 'hasPages') && $transactions->hasPages())
-        <div class="mt-1">
-            {{ $transactions->links() }}
-        </div>
-    @endif
 
 </x-layouts.app>

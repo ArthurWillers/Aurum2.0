@@ -47,19 +47,10 @@ class TransactionController extends Controller
             }
         }
 
-        // Verifica se deve usar paginação
-        if ($request->has('paginate')) {
-            $transactions = $query
-                ->latest('date')
-                ->latest('updated_at')
-                ->paginate(9)
-                ->withQueryString();
-        } else {
-            $transactions = $query
-                ->latest('date')
-                ->latest('updated_at')
-                ->get();
-        }
+        $transactions = $query
+            ->latest('date')
+            ->latest('updated_at')
+            ->get();
 
         // Busca todas as categorias do usuário para o filtro
         $categories = Auth::user()->categories()
