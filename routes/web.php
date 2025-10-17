@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\DataManagementController;
 
 Route::redirect('/', '/login');
 
@@ -17,6 +18,10 @@ Route::middleware('auth')->group(function () {
   Route::delete('/account', [AccountController::class, 'destroy'])->name('account.destroy')->middleware(['password.confirm']);
 
   Route::post('/update-month', MonthController::class)->name('month.update');
+
+  // Rotas de Gerenciamento de Dados
+  Route::get('/data/export', [DataManagementController::class, 'export'])->name('data.export');
+  Route::post('/data/import', [DataManagementController::class, 'import'])->name('data.import');
 
   Route::resource('categories', CategoryController::class)->except(['show']);
 
