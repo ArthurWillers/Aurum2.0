@@ -1,13 +1,8 @@
 <x-layouts.app>
     {{-- Cabeçalho --}}
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">Nova Categoria</h2>
-        <x-button href="{{ route('categories.index') }}">
-            Voltar
-        </x-button>
-    </div>
+    <x-page-header title="Nova Categoria" :action="route('categories.index')" actionText="Voltar" />
 
-    <div class="bg-white rounded-lg shadow-lg p-6 w-full border border-neutral-200">
+    <x-card>
         <form action="{{ route('categories.store') }}" method="POST" class="space-y-6">
             @csrf
             <x-form-input label="Nome" name="name" id="name" placeholder="Ex: Salário, Supermercado, Lazer"
@@ -32,6 +27,6 @@
                     Salvar
                 </x-button>
             </div>
-    </div>
+    </x-card>
 
 </x-layouts.app>

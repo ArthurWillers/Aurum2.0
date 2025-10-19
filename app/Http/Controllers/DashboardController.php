@@ -16,6 +16,9 @@ class DashboardController extends Controller
 
         // Pega o mês da sessão ou usa o mês atual
         $selectedMonth = session('selected_month', now()->format('Y-m'));
+        
+        // Formata o mês/ano para exibição
+        $monthYear = Carbon::parse($selectedMonth)->locale('pt_BR')->isoFormat('MMMM [de] YYYY');
 
         // Pega o mês anterior
         $previousMonth = Carbon::parse($selectedMonth)->subMonth();
@@ -102,7 +105,7 @@ class DashboardController extends Controller
             return $month['incomes'] > 0 || $month['expenses'] > 0;
         });
 
-        return view('dashboard', compact('incomes', 'expenses', 'expensesByCategory', 'incomesByCategory', 'incomesChange', 'expensesChange', 'balanceChange', 'incomesDiff', 'expensesDiff', 'balanceDiff', 'chartData', 'hasChartData'));
+        return view('dashboard', compact('incomes', 'expenses', 'expensesByCategory', 'incomesByCategory', 'incomesChange', 'expensesChange', 'balanceChange', 'incomesDiff', 'expensesDiff', 'balanceDiff', 'chartData', 'hasChartData', 'monthYear'));
     }
 
     /**
