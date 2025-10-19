@@ -79,9 +79,10 @@
                             </span>
                         </div>
                         <div class="px-4 lg:px-6 py-4">
-                            <span class="text-sm text-neutral-600">
+                            <a href="{{ route('daily-summary', ['date' => $transaction->date->format('Y-m-d')]) }}"
+                                class="text-sm text-neutral-600 hover:text-amber-600 hover:underline transition-colors">
                                 {{ $transaction->date->format('d/m/Y') }}
-                            </span>
+                            </a>
                         </div>
                         <div class="px-4 lg:px-6 py-4">
                             <span
@@ -121,9 +122,10 @@
                         <div class="flex items-start justify-between gap-3">
                             <div class="flex-1 min-w-0">
                                 <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-sm text-neutral-600">
+                                    <a href="{{ route('daily-summary', ['date' => $transaction->date->format('Y-m-d')]) }}"
+                                        class="text-sm text-neutral-600 hover:text-amber-600 hover:underline transition-colors">
                                         {{ $transaction->date->format('d/m/Y') }}
-                                    </span>
+                                    </a>
                                 </div>
                                 <h3 class="text-base font-semibold text-neutral-900 leading-tight mb-1">
                                     {{ $transaction->description }}
