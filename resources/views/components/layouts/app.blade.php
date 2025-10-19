@@ -37,6 +37,11 @@
                     Dashboard
                 </x-nav-link>
 
+                <x-nav-link :href="route('daily-summary')" :current="request()->routeIs('daily-summary')">
+                    <x-icon name="calendar-days" class="w-4 h-4" />
+                    Resumo Diário
+                </x-nav-link>
+
                 <x-nav-link :href="route('incomes.index')" :current="request()->routeIs('incomes.*')">
                     <x-icon name="arrow-trending-up" class="w-4 h-4" />
                     Receitas

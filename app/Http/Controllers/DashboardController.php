@@ -18,7 +18,7 @@ class DashboardController extends Controller
         $selectedMonth = session('selected_month', now()->format('Y-m'));
         
         // Formata o mês/ano para exibição
-        $monthYear = Carbon::parse($selectedMonth)->locale('pt_BR')->isoFormat('MMMM [de] YYYY');
+        $monthYear = Carbon::parse($selectedMonth)->isoFormat('MMMM [de] YYYY');
 
         // Pega o mês anterior
         $previousMonth = Carbon::parse($selectedMonth)->subMonth();
