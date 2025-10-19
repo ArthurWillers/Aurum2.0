@@ -96,8 +96,13 @@ class DashboardController extends Controller
 
         // Dados para o gráfico de evolução - 3 meses anteriores, atual e próximo
         $chartData = $this->getFinancialEvolutionData();
+        
+        // Verifica se há dados reais no gráfico (pelo menos um mês com transações)
+        $hasChartData = collect($chartData)->contains(function ($month) {
+            return $month['incomes'] > 0 || $month['expenses'] > 0;
+        });
 
-        return view('dashboard', compact('incomes', 'expenses', 'expensesByCategory', 'incomesByCategory', 'incomesChange', 'expensesChange', 'balanceChange', 'incomesDiff', 'expensesDiff', 'balanceDiff', 'chartData'));
+        return view('dashboard', compact('incomes', 'expenses', 'expensesByCategory', 'incomesByCategory', 'incomesChange', 'expensesChange', 'balanceChange', 'incomesDiff', 'expensesDiff', 'balanceDiff', 'chartData', 'hasChartData'));
     }
 
     /**

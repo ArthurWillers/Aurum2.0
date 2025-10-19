@@ -281,7 +281,7 @@
         @endif
 
         {{-- Gráfico de Linhas - Histórico Mensal --}}
-        @if (!empty($chartData) && count($chartData) > 0)
+        @if ($hasChartData)
             <div class="bg-white rounded-lg shadow-lg p-6 border border-neutral-200">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
