@@ -3,7 +3,7 @@
 
     <x-auth-session-status :status="session('status')" />
 
-    <form method="POST" action="{{ route('password.update') }}" class="space-y-6" x-data="{ loading: false }"
+    <form method="POST" action="{{ route('password.update') }}" class="space-y-6" x-data="{ loading: false, showRules: false }"
         @submit="loading = true">
         @csrf
 
@@ -21,6 +21,9 @@
         {{-- Confirmar Senha --}}
         <x-form-input label="Confirmar Nova Senha" type="password" name="password_confirmation"
             placeholder="Confirme sua nova senha" required viewable />
+
+        {{-- Regras de senha --}}
+        <x-password-rules />
 
         {{-- Botão para redefinir senha --}}
         <x-button type="submit" class="w-full">

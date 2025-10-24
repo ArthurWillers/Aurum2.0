@@ -3,7 +3,7 @@
 
     <x-auth-session-status :status="session('status')" />
 
-    <form action="{{ route('register.store') }}" method="POST" class="space-y-6" x-data="{ loading: false }"
+    <form action="{{ route('register.store') }}" method="POST" class="space-y-6" x-data="{ loading: false, showRules: false }"
         @submit="loading = true">
         @csrf
 
@@ -17,6 +17,9 @@
 
         {{-- Senha --}}
         <x-form-input label="Senha" type="password" name="password" placeholder="Sua senha" required viewable />
+
+        {{-- Regras de senha --}}
+        <x-password-rules />
 
         {{-- Confirmar Senha --}}
         <x-form-input label="Confirmar Senha" type="password" name="password_confirmation"
