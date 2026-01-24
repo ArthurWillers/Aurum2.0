@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\User;
 use App\Models\Category;
 use App\Models\Transaction;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Database\Seeder;
 
 class TestDataSeeder extends Seeder
 {
@@ -17,8 +17,8 @@ class TestDataSeeder extends Seeder
     {
         // Pega o primeiro usuário (ou cria um se não existir)
         $user = User::first();
-        
-        if (!$user) {
+
+        if (! $user) {
             $user = User::create([
                 'name' => 'Usuário Teste',
                 'email' => 'teste@exemplo.com',
@@ -73,7 +73,7 @@ class TestDataSeeder extends Seeder
         // Função auxiliar para criar transações
         $createTransactions = function ($month, $multiplier = 1) use ($user, $createdIncomeCategories, $createdExpenseCategories) {
             $date = Carbon::parse($month);
-            
+
             // Receitas
             Transaction::create([
                 'user_id' => $user->id,
@@ -189,28 +189,28 @@ class TestDataSeeder extends Seeder
 
         // Criar transações para os últimos 6 meses
         $now = Carbon::now();
-        
+
         // 5 meses atrás (valores baixos)
         $createTransactions($now->copy()->subMonths(5)->startOfMonth(), 0.7);
-        
+
         // 4 meses atrás (valores normais)
         $createTransactions($now->copy()->subMonths(4)->startOfMonth(), 1);
-        
+
         // 3 meses atrás (valores altos - MÊS ESPECIAL)
         $createTransactions($now->copy()->subMonths(3)->startOfMonth(), 2.5);
-        
+
         // 2 meses atrás (valores normais)
         $createTransactions($now->copy()->subMonths(2)->startOfMonth(), 1);
-        
+
         // Mês passado (valores um pouco maiores)
         $createTransactions($now->copy()->subMonths(1)->startOfMonth(), 1.3);
-        
+
         // Mês atual (valores normais)
         $createTransactions($now->copy()->startOfMonth(), 1);
 
         $this->command->info('✅ Dados de teste criados com sucesso!');
-        $this->command->info('📊 Categorias criadas: ' . (count($createdIncomeCategories) + count($createdExpenseCategories)));
+        $this->command->info('📊 Categorias criadas: '.(count($createdIncomeCategories) + count($createdExpenseCategories)));
         $this->command->info('💰 Transações criadas para os últimos 6 meses');
-        $this->command->info('🚀 Mês ' . $now->copy()->subMonths(3)->format('m/Y') . ' possui valores altos para teste');
+        $this->command->info('🚀 Mês '.$now->copy()->subMonths(3)->format('m/Y').' possui valores altos para teste');
     }
 }

@@ -20,6 +20,7 @@ class AccountController extends Controller
         // Invalidar a sessão antiga
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         return redirect('/login')->with('status', 'Sua conta foi deletada com sucesso.');
     }
 }

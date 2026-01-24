@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-use App\Models\Transaction;
 use App\Models\Category;
+use App\Models\Transaction;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
 class StoreTransactionRequest extends FormRequest
@@ -35,7 +35,7 @@ class StoreTransactionRequest extends FormRequest
         // Se encontrou um campo de data válido, copia o valor para o campo 'date'
         if ($dateField && request()->has($dateField)) {
             $this->merge([
-                'date' => request($dateField)
+                'date' => request($dateField),
             ]);
         }
     }
@@ -78,12 +78,12 @@ class StoreTransactionRequest extends FormRequest
                     'required',
                     function ($attribute, $value, $fail) {
                         $cleanValue = str_replace(',', '.', $value);
-                        if (!is_numeric($cleanValue)) {
+                        if (! is_numeric($cleanValue)) {
                             $fail('O valor deve ser um número válido.');
                         } elseif ($cleanValue < 0.01) {
                             $fail('O valor deve ser maior que zero.');
                         }
-                    }
+                    },
                 ];
                 break;
 
@@ -92,12 +92,12 @@ class StoreTransactionRequest extends FormRequest
                     'required',
                     function ($attribute, $value, $fail) {
                         $cleanValue = str_replace(',', '.', $value);
-                        if (!is_numeric($cleanValue)) {
+                        if (! is_numeric($cleanValue)) {
                             $fail('O valor deve ser um número válido.');
                         } elseif ($cleanValue < 0.01) {
                             $fail('O valor deve ser maior que zero.');
                         }
-                    }
+                    },
                 ];
                 $rules['recurring_months'] = 'required|integer|min:2|max:300';
                 break;
@@ -107,12 +107,12 @@ class StoreTransactionRequest extends FormRequest
                     'required',
                     function ($attribute, $value, $fail) {
                         $cleanValue = str_replace(',', '.', $value);
-                        if (!is_numeric($cleanValue)) {
+                        if (! is_numeric($cleanValue)) {
                             $fail('O valor total deve ser um número válido.');
                         } elseif ($cleanValue < 0.01) {
                             $fail('O valor total deve ser maior que zero.');
                         }
-                    }
+                    },
                 ];
                 $rules['installments'] = 'required|integer|min:2|max:300';
                 break;

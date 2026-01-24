@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
         // Pega o mês da sessão ou usa o mês atual
         $selectedMonth = session('selected_month', now()->format('Y-m'));
-        
+
         // Formata o mês/ano para exibição
         $monthYear = Carbon::parse($selectedMonth)->isoFormat('MMMM [de] YYYY');
 
@@ -99,7 +99,7 @@ class DashboardController extends Controller
 
         // Dados para o gráfico de evolução - 3 meses anteriores, atual e próximo
         $chartData = $this->getFinancialEvolutionData();
-        
+
         // Verifica se há dados reais no gráfico (pelo menos um mês com transações)
         $hasChartData = collect($chartData)->contains(function ($month) {
             return $month['incomes'] > 0 || $month['expenses'] > 0;

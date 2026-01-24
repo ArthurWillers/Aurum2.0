@@ -15,6 +15,7 @@ class MonthController extends Controller
             'month' => 'required|date_format:Y-m',
         ]);
         $request->session()->put('selected_month', $request->input('month'));
+
         return back();
     }
 }
