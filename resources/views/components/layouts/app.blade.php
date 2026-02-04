@@ -25,11 +25,9 @@
             <div class="flex flex-col py-3 gap-2">
                 <form action="{{ route('month.update') }}" method="POST">
                     @csrf
-                    <label class="text-xs font-medium text-neutral-700 mb-1 block">Mês de Referência</label>
-                    <input type="month" name="month" 
-                        class="w-full text-sm px-3 py-2 h-10 border border-neutral-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-neutral-400"
-                        value="{{ session('selected_month', now()->format('Y-m')) }}" 
-                        onchange="form.submit()" required />
+                    <x-form-input type="month" name="month" label="Mês de Referência" labelClass="!text-xs"
+                        value="{{ session('selected_month', now()->format('Y-m')) }}" onchange="form.submit()"
+                        required />
                 </form>
 
                 @php
@@ -38,22 +36,22 @@
                     $nextMonth = \Carbon\Carbon::createFromFormat('Y-m', $currentMonth)->addMonth()->format('Y-m');
                 @endphp
 
-                <div class="flex items-center gap-2">
-                    <form action="{{ route('month.update') }}" method="POST" class="flex-1">
+                <div class="grid grid-cols-2 gap-2">
+                    <form action="{{ route('month.update') }}" method="POST">
                         @csrf
                         <input type="hidden" name="month" value="{{ $prevMonth }}">
-                        <button type="submit" class="w-full flex items-center justify-center gap-1 px-3 py-2 h-10 text-sm font-medium text-neutral-700 bg-white border border-neutral-300 rounded-md hover:bg-neutral-50 cursor-pointer">
-                            <x-icon name="chevron-left" class="w-4 h-4" />
-                            Anterior
+                        <button type="submit" class="w-full flex items-center justify-center gap-1 px-3 py-2 text-sm font-medium text-neutral-700 bg-white border border-neutral-300 rounded-md hover:bg-neutral-50 cursor-pointer">
+                            <x-icon name="chevron-left" class="w-4 h-4 shrink-0" />
+                            <span>Anterior</span>
                         </button>
                     </form>
 
-                    <form action="{{ route('month.update') }}" method="POST" class="flex-1">
+                    <form action="{{ route('month.update') }}" method="POST">
                         @csrf
                         <input type="hidden" name="month" value="{{ $nextMonth }}">
-                        <button type="submit" class="w-full flex items-center justify-center gap-1 px-3 py-2 h-10 text-sm font-medium text-neutral-700 bg-white border border-neutral-300 rounded-md hover:bg-neutral-50 cursor-pointer">
-                            Próximo
-                            <x-icon name="chevron-right" class="w-4 h-4" />
+                        <button type="submit" class="w-full flex items-center justify-center gap-1 px-3 py-2 text-sm font-medium text-neutral-700 bg-white border border-neutral-300 rounded-md hover:bg-neutral-50 cursor-pointer">
+                            <span>Próximo</span>
+                            <x-icon name="chevron-right" class="w-4 h-4 shrink-0" />
                         </button>
                     </form>
                 </div>
