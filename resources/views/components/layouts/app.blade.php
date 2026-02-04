@@ -27,7 +27,7 @@
                     @csrf
                     <label class="text-xs font-medium text-neutral-700 mb-1 block">Mês de Referência</label>
                     <input type="month" name="month" 
-                        class="w-full text-sm px-2 py-1.5 border border-neutral-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-neutral-400"
+                        class="w-full text-sm px-3 py-2 h-10 border border-neutral-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-neutral-400"
                         value="{{ session('selected_month', now()->format('Y-m')) }}" 
                         onchange="form.submit()" required />
                 </form>
@@ -38,11 +38,11 @@
                     $nextMonth = \Carbon\Carbon::createFromFormat('Y-m', $currentMonth)->addMonth()->format('Y-m');
                 @endphp
 
-                <div class="flex items-center gap-1">
+                <div class="flex items-center gap-2">
                     <form action="{{ route('month.update') }}" method="POST" class="flex-1">
                         @csrf
                         <input type="hidden" name="month" value="{{ $prevMonth }}">
-                        <button type="submit" class="w-full flex items-center justify-center gap-1 px-2 py-1.5 text-sm font-medium text-neutral-700 bg-white border border-neutral-300 rounded-md hover:bg-neutral-50 cursor-pointer">
+                        <button type="submit" class="w-full flex items-center justify-center gap-1 px-3 py-2 h-10 text-sm font-medium text-neutral-700 bg-white border border-neutral-300 rounded-md hover:bg-neutral-50 cursor-pointer">
                             <x-icon name="chevron-left" class="w-4 h-4" />
                             Anterior
                         </button>
@@ -51,7 +51,7 @@
                     <form action="{{ route('month.update') }}" method="POST" class="flex-1">
                         @csrf
                         <input type="hidden" name="month" value="{{ $nextMonth }}">
-                        <button type="submit" class="w-full flex items-center justify-center gap-1 px-2 py-1.5 text-sm font-medium text-neutral-700 bg-white border border-neutral-300 rounded-md hover:bg-neutral-50 cursor-pointer">
+                        <button type="submit" class="w-full flex items-center justify-center gap-1 px-3 py-2 h-10 text-sm font-medium text-neutral-700 bg-white border border-neutral-300 rounded-md hover:bg-neutral-50 cursor-pointer">
                             Próximo
                             <x-icon name="chevron-right" class="w-4 h-4" />
                         </button>
