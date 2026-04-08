@@ -30,6 +30,23 @@
                         <p class="text-xl sm:text-2xl font-semibold text-green-600 break-words">
                             R$ {{ number_format($incomes, 2, ',', '.') }}
                         </p>
+                        <div class="mt-2 flex flex-col gap-1">
+                            @if ($currentIncomesToDate !== null)
+                                <p class="text-xs text-neutral-500">
+                                    @if ($isCurrentMonthSelected)
+                                        Até hoje:
+                                    @else
+                                        1º dia:
+                                    @endif
+                                    <span class="font-medium text-green-600">R$
+                                        {{ number_format($currentIncomesToDate, 2, ',', '.') }}</span>
+                                </p>
+                            @endif
+                            <p class="text-xs text-neutral-500">
+                                {{ ucfirst($nextMonthYear) }}: <span class="font-medium text-green-600">R$
+                                    {{ number_format($nextIncomes, 2, ',', '.') }}</span>
+                            </p>
+                        </div>
                     </div>
                     <div
                         class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -62,6 +79,23 @@
                         <p class="text-xl sm:text-2xl font-semibold text-red-600 break-words">
                             R$ {{ number_format($expenses, 2, ',', '.') }}
                         </p>
+                        <div class="mt-2 flex flex-col gap-1">
+                            @if ($currentExpensesToDate !== null)
+                                <p class="text-xs text-neutral-500">
+                                    @if ($isCurrentMonthSelected)
+                                        Até hoje:
+                                    @else
+                                        1º dia:
+                                    @endif
+                                    <span class="font-medium text-red-600">R$
+                                        {{ number_format($currentExpensesToDate, 2, ',', '.') }}</span>
+                                </p>
+                            @endif
+                            <p class="text-xs text-neutral-500">
+                                {{ ucfirst($nextMonthYear) }}: <span class="font-medium text-red-600">R$
+                                    {{ number_format($nextExpenses, 2, ',', '.') }}</span>
+                            </p>
+                        </div>
                     </div>
                     <div
                         class="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -96,20 +130,29 @@
                             {{ $balance >= 0 ? '+' : '-' }}R$
                             {{ number_format(abs($balance), 2, ',', '.') }}
                         </p>
-                        @if ($currentBalanceToDate !== null)
-                            <p class="mt-1 text-xs text-neutral-500">
-                                @if ($isCurrentMonthSelected)
-                                    Saldo até hoje:
-                                @else
-                                    Saldo do primeiro dia:
-                                @endif
-                                <span
-                                    class="font-medium {{ $currentBalanceToDate >= 0 ? 'text-green-600' : 'text-red-600' }}">
-                                    {{ $currentBalanceToDate >= 0 ? '+' : '-' }}R$
-                                    {{ number_format(abs($currentBalanceToDate), 2, ',', '.') }}
+                        <div class="mt-2 flex flex-col gap-1">
+                            @if ($currentBalanceToDate !== null)
+                                <p class="text-xs text-neutral-500">
+                                    @if ($isCurrentMonthSelected)
+                                        Até hoje:
+                                    @else
+                                        1º dia:
+                                    @endif
+                                    <span
+                                        class="font-medium {{ $currentBalanceToDate >= 0 ? 'text-green-600' : 'text-red-600' }}">
+                                        {{ $currentBalanceToDate >= 0 ? '+' : '-' }}R$
+                                        {{ number_format(abs($currentBalanceToDate), 2, ',', '.') }}
+                                    </span>
+                                </p>
+                            @endif
+                            <p class="text-xs text-neutral-500">
+                                {{ ucfirst($nextMonthYear) }}:
+                                <span class="font-medium {{ $nextBalance >= 0 ? 'text-green-600' : 'text-red-600' }}">
+                                    {{ $nextBalance >= 0 ? '+' : '-' }}R$
+                                    {{ number_format(abs($nextBalance), 2, ',', '.') }}
                                 </span>
                             </p>
-                        @endif
+                        </div>
                     </div>
                     <div
                         class="w-10 h-10 sm:w-12 sm:h-12 {{ $balance >= 0 ? 'bg-green-100' : 'bg-red-100' }} rounded-lg flex items-center justify-center flex-shrink-0">

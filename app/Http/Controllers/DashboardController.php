@@ -23,14 +23,23 @@ class DashboardController extends Controller
         // Formata o mês/ano para exibição
         $monthYear = $selectedMonthDate->isoFormat('MMMM [de] YYYY');
 
-        // Pega o mês anterior
+        // Pega o mês anterior e próximo
         $previousMonth = $selectedMonthDate->copy()->subMonth();
+        $nextMonth = $selectedMonthDate->copy()->addMonth();
+        $nextMonthYear = $nextMonth->isoFormat('MMMM [de] YYYY');
 
         // Busca a soma das receitas do mês selecionado
         $incomes = Auth::user()->transactions()
             ->where('type', 'income')
             ->whereYear('date', $selectedMonthDate->year)
             ->whereMonth('date', $selectedMonthDate->month)
+            ->sum('amount');
+
+        // Busca a soma das receitas do próximo mês
+        $nextIncomes = Auth::user()->transactions()
+            ->where('type', 'income')
+            ->whereYear('date', $nextMonth->year)
+            ->whereMonth('date', $nextMonth->month)
             ->sum('amount');
 
         // Busca a soma das receitas do mês anterior
@@ -45,6 +54,13 @@ class DashboardController extends Controller
             ->where('type', 'expense')
             ->whereYear('date', $selectedMonthDate->year)
             ->whereMonth('date', $selectedMonthDate->month)
+            ->sum('amount');
+
+        // Busca a soma das despesas do próximo mês
+        $nextExpenses = Auth::user()->transactions()
+            ->where('type', 'expense')
+            ->whereYear('date', $nextMonth->year)
+            ->whereMonth('date', $nextMonth->month)
             ->sum('amount');
 
         // Busca a soma das despesas do mês anterior
@@ -62,6 +78,7 @@ class DashboardController extends Controller
         $expensesChange = $previousExpenses > 0 ? ($expensesDiff / $previousExpenses) * 100 : ($expenses > 0 ? 100 : 0);
 
         $balance = $incomes - $expenses;
+        $nextBalance = $nextIncomes - $nextExpenses;
         $previousBalance = $previousIncomes - $previousExpenses;
         $balanceDiff = $balance - $previousBalance;
         $balanceChange = $previousBalance != 0 ? ($balanceDiff / abs($previousBalance)) * 100 : ($balance > 0 ? 100 : ($balance < 0 ? -100 : 0));
@@ -69,7 +86,8 @@ class DashboardController extends Controller
         $isPastMonth = $selectedMonthDate->copy()->startOfMonth()->isBefore($today->copy()->startOfMonth());
 
         $currentBalanceToDate = null;
-
+        $currentIncomesToDate = null;
+        $currentExpensesToDate = null;
         if (! $isPastMonth) {
             $referenceDate = $isCurrentMonthSelected ? $today->toDateString() : $selectedMonthDate->copy()->startOfMonth()->toDateString();
 
@@ -132,7 +150,16 @@ class DashboardController extends Controller
             return $month['incomes'] > 0 || $month['expenses'] > 0;
         });
 
-        return view('dashboard', compact('incomes', 'expenses', 'balance', 'expensesByCategory', 'incomesByCategory', 'incomesChange', 'expensesChange', 'balanceChange', 'incomesDiff', 'expensesDiff', 'balanceDiff', 'chartData', 'hasChartData', 'monthYear', 'isCurrentMonthSelected', 'currentBalanceToDate'));
+        return view('dashboard', compact(
+            'incomes', 'expenses', 'balance',
+            'nextIncomes', 'nextExpenses', 'nextBalance', 'nextMonthYear',
+            'expensesByCategory', 'incomesByCategory',
+            'incomesChange', 'expensesChange', 'balanceChange',
+            'incomesDiff', 'expensesDiff', 'balanceDiff',
+            'chartData', 'hasChartData', 'monthYear',
+            'isCurrentMonthSelected', 'currentBalanceToDate',
+            'currentIncomesToDate', 'currentExpensesToDate'
+        ));
     }
 
     /**
