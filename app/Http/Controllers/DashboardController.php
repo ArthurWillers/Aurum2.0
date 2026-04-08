@@ -16,18 +16,21 @@ class DashboardController extends Controller
 
         // Pega o mês da sessão ou usa o mês atual
         $selectedMonth = session('selected_month', now()->format('Y-m'));
+        $selectedMonthDate = Carbon::parse($selectedMonth);
+        $today = now();
+        $isCurrentMonthSelected = $selectedMonthDate->isSameMonth($today);
 
         // Formata o mês/ano para exibição
-        $monthYear = Carbon::parse($selectedMonth)->isoFormat('MMMM [de] YYYY');
+        $monthYear = $selectedMonthDate->isoFormat('MMMM [de] YYYY');
 
         // Pega o mês anterior
-        $previousMonth = Carbon::parse($selectedMonth)->subMonth();
+        $previousMonth = $selectedMonthDate->copy()->subMonth();
 
         // Busca a soma das receitas do mês selecionado
         $incomes = Auth::user()->transactions()
             ->where('type', 'income')
-            ->whereYear('date', Carbon::parse($selectedMonth)->year)
-            ->whereMonth('date', Carbon::parse($selectedMonth)->month)
+            ->whereYear('date', $selectedMonthDate->year)
+            ->whereMonth('date', $selectedMonthDate->month)
             ->sum('amount');
 
         // Busca a soma das receitas do mês anterior
@@ -40,8 +43,8 @@ class DashboardController extends Controller
         // Busca a soma das despesas do mês selecionado
         $expenses = Auth::user()->transactions()
             ->where('type', 'expense')
-            ->whereYear('date', Carbon::parse($selectedMonth)->year)
-            ->whereMonth('date', Carbon::parse($selectedMonth)->month)
+            ->whereYear('date', $selectedMonthDate->year)
+            ->whereMonth('date', $selectedMonthDate->month)
             ->sum('amount');
 
         // Busca a soma das despesas do mês anterior
@@ -63,11 +66,35 @@ class DashboardController extends Controller
         $balanceDiff = $balance - $previousBalance;
         $balanceChange = $previousBalance != 0 ? ($balanceDiff / abs($previousBalance)) * 100 : ($balance > 0 ? 100 : ($balance < 0 ? -100 : 0));
 
+        $isPastMonth = $selectedMonthDate->copy()->startOfMonth()->isBefore($today->copy()->startOfMonth());
+
+        $currentBalanceToDate = null;
+
+        if (! $isPastMonth) {
+            $referenceDate = $isCurrentMonthSelected ? $today->toDateString() : $selectedMonthDate->copy()->startOfMonth()->toDateString();
+
+            $currentIncomesToDate = Auth::user()->transactions()
+                ->where('type', 'income')
+                ->whereYear('date', $selectedMonthDate->year)
+                ->whereMonth('date', $selectedMonthDate->month)
+                ->whereDate('date', '<=', $referenceDate)
+                ->sum('amount');
+
+            $currentExpensesToDate = Auth::user()->transactions()
+                ->where('type', 'expense')
+                ->whereYear('date', $selectedMonthDate->year)
+                ->whereMonth('date', $selectedMonthDate->month)
+                ->whereDate('date', '<=', $referenceDate)
+                ->sum('amount');
+
+            $currentBalanceToDate = $currentIncomesToDate - $currentExpensesToDate;
+        }
+
         // Busca a soma das despesas por categoria para o gráfico
         $expensesByCategory = Auth::user()->transactions()
             ->where('type', 'expense')
-            ->whereYear('date', Carbon::parse($selectedMonth)->year)
-            ->whereMonth('date', Carbon::parse($selectedMonth)->month)
+            ->whereYear('date', $selectedMonthDate->year)
+            ->whereMonth('date', $selectedMonthDate->month)
             ->with('category')
             ->get()
             ->groupBy('category_id')
@@ -83,8 +110,8 @@ class DashboardController extends Controller
         // Busca a soma das receitas por categoria para o gráfico
         $incomesByCategory = Auth::user()->transactions()
             ->where('type', 'income')
-            ->whereYear('date', Carbon::parse($selectedMonth)->year)
-            ->whereMonth('date', Carbon::parse($selectedMonth)->month)
+            ->whereYear('date', $selectedMonthDate->year)
+            ->whereMonth('date', $selectedMonthDate->month)
             ->with('category')
             ->get()
             ->groupBy('category_id')
@@ -105,7 +132,7 @@ class DashboardController extends Controller
             return $month['incomes'] > 0 || $month['expenses'] > 0;
         });
 
-        return view('dashboard', compact('incomes', 'expenses', 'expensesByCategory', 'incomesByCategory', 'incomesChange', 'expensesChange', 'balanceChange', 'incomesDiff', 'expensesDiff', 'balanceDiff', 'chartData', 'hasChartData', 'monthYear'));
+        return view('dashboard', compact('incomes', 'expenses', 'balance', 'expensesByCategory', 'incomesByCategory', 'incomesChange', 'expensesChange', 'balanceChange', 'incomesDiff', 'expensesDiff', 'balanceDiff', 'chartData', 'hasChartData', 'monthYear', 'isCurrentMonthSelected', 'currentBalanceToDate'));
     }
 
     /**

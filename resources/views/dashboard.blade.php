@@ -92,15 +92,29 @@
                             @endif
                         </div>
                         <p
-                            class="text-xl sm:text-2xl font-semibold {{ $incomes - $expenses >= 0 ? 'text-green-600' : 'text-red-600' }} break-words">
-                            {{ $incomes - $expenses >= 0 ? '+' : '-' }}R$
-                            {{ number_format(abs($incomes - $expenses), 2, ',', '.') }}
+                            class="text-xl sm:text-2xl font-semibold {{ $balance >= 0 ? 'text-green-600' : 'text-red-600' }} break-words">
+                            {{ $balance >= 0 ? '+' : '-' }}R$
+                            {{ number_format(abs($balance), 2, ',', '.') }}
                         </p>
+                        @if ($currentBalanceToDate !== null)
+                            <p class="mt-1 text-xs text-neutral-500">
+                                @if ($isCurrentMonthSelected)
+                                    Saldo até hoje:
+                                @else
+                                    Saldo do primeiro dia:
+                                @endif
+                                <span
+                                    class="font-medium {{ $currentBalanceToDate >= 0 ? 'text-green-600' : 'text-red-600' }}">
+                                    {{ $currentBalanceToDate >= 0 ? '+' : '-' }}R$
+                                    {{ number_format(abs($currentBalanceToDate), 2, ',', '.') }}
+                                </span>
+                            </p>
+                        @endif
                     </div>
                     <div
-                        class="w-10 h-10 sm:w-12 sm:h-12 {{ $incomes - $expenses >= 0 ? 'bg-green-100' : 'bg-red-100' }} rounded-lg flex items-center justify-center flex-shrink-0">
+                        class="w-10 h-10 sm:w-12 sm:h-12 {{ $balance >= 0 ? 'bg-green-100' : 'bg-red-100' }} rounded-lg flex items-center justify-center flex-shrink-0">
                         <x-icon name="scale"
-                            class="w-5 h-5 sm:w-6 sm:h-6 {{ $incomes - $expenses >= 0 ? 'text-green-600' : 'text-red-600' }}" />
+                            class="w-5 h-5 sm:w-6 sm:h-6 {{ $balance >= 0 ? 'text-green-600' : 'text-red-600' }}" />
                     </div>
                 </div>
             </x-card>
