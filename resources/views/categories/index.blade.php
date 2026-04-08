@@ -2,7 +2,7 @@
     {{-- Cabeçalho --}}
     <x-page-header title="Categorias" :action="route('categories.create')" actionText="Nova Categoria" icon="plus" />
 
-    <div class="w-full rounded-lg shadow-xl border border-neutral-200 bg-white">
+    <div class="w-full rounded-lg shadow-xl border border-neutral-200 bg-white lg:mb-8">
 
         {{-- Header - Desktop --}}
         <div class="hidden sm:grid sm:grid-cols-[2fr_1fr_1fr] border-b border-neutral-200">
